@@ -1,0 +1,35 @@
+*{
+    box-sizing: border-box;
+}
+
+.bgMenu {
+    background-color: #2A3F54;
+    /* position: fixed; */
+    
+    height: 100%;
+}
+
+.text-size{
+    font-size: 20px;
+}
+
+
+.menu-ul{
+    list-style: none;
+}
+
+.li-hover:hover{
+    background-color: rgba(255, 255, 255, 0.205);
+    color: #E7E7E7;
+    cursor: pointer;
+}
+
+.bgNavBar{
+    background-color: #EDEDED;
+    position: fixed;
+    top: 0;
+    right: 0;
+    /* width: auto; */
+    width: 100%;
+    height: 50px;
+}

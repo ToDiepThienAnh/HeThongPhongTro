@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import './styleBase.css'
+
 
 export default class Menu extends Component {
     render() {
         return (
             <div className='text-white'>
-                <h5 className='text-center'>Quản lí Phòng Trọ</h5>
+                <h3 className='text-center'>Quản lí Phòng Trọ</h3>
                 <p className='text-center'>Simple House</p>
                 <span className='text-center'>Xin chào Thiên Anh</span>
                 <ul className='menu-ul px-0 mt-4'>
