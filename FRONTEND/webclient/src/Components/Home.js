@@ -3,7 +3,8 @@ import FormDichVu from './DichVu/FormDichVu'
 import FormKhachThue from './KhachThue/FormKhachThue'
 import Menu from './Menu'
 import DanhSachPhong from './Phong/DanhSachPhong'
-import ServicesList from './ServicesList'
+import ServicesList from './DichVu/ServicesList'
+import FormHopDong from './HopDong/FormHopDong'
 
 export default class Home extends Component {
     render() {
@@ -20,7 +21,7 @@ export default class Home extends Component {
                         {/* <ServicesList></ServicesList> */}
                         {/* <DanhSachPhong></DanhSachPhong> */}
                         {/* <FormKhachThue></FormKhachThue> */}
-                        <FormDichVu></FormDichVu>
+                        <FormHopDong></FormHopDong>
                     </div>
                 </div>
             </div>
