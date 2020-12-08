@@ -25,43 +25,363 @@ export default class DanhSachPhong extends Component {
                     <span> Đã thu phí 1 |</span>
                 </div>
                 <div className='text-right'>
-                <button className='btn btn-success my-2 mr-4'><i class="fa fa-bed"></i><span className='ml-2'>Thêm phòng</span></button>
+                    <button className='btn btn-success my-2 mr-4'><i class="fa fa-bed"></i><span className='ml-2'>Thêm phòng</span></button>
                 </div>
                 <div className='row border-top pt-3'>
-                   <div className='col-2 px-0 pl-2'>
-                   <div className="card">
-                        <div className='card-img-top pl-2 text-secondary'>
-                        <i style={{ fontSize:20}} class="fa fa-home"></i>
-                        <span className='ml-2' style={{ fontSize:20}}>1</span>
-                        </div>
-                        <div className="card-body pl-2">
-                            <div>
-                                <button style={{fontSize:14}} className='btn btn-success px-2 mr-1'>Trả</button>
-                                <button style={{fontSize:14}} className='btn btn-secondary px-2 mr-1'>Xem</button>
-                                <button style={{fontSize:14}} className='btn btn-info px-2'>Sửa</button>
+                    <div className='col-2 px-0 pl-2'>
+                        <div className="card">
+                            <div className='card-img-top pl-2 text-secondary'>
+                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
+                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
                             </div>
-                            <div className='my-4 text-secondary'>
-                            <i class="fa fa-user"></i>
-                            <span className='ml-2'>Thiên Anh</span>
+                            <div className="card-body pl-2">
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
+                                </div>
+                                <div className='my-4 text-secondary'>
+                                    <i class="fa fa-user"></i>
+                                    <span className='ml-2'>Thiên Anh</span>
 
+                                </div>
+                                <div className='my-3'>
+                                    <i className='text-secondary' class="fa fa-money-bill"></i>
+                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
+                                </div>
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
+                                        <i class="fa fa-edit"></i>
+                                        <span className='ml-1'>Chỉnh sửa</span>
+                                    </button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
+                                        <i class="fa fa-trash"></i>
+                                        <span className='ml-1'>Xóa</span>
+                                    </button>
+                                </div>
                             </div>
-                            <div className='my-3'>
-                            <i className='text-secondary' class="fa fa-money-bill"></i>
-                            <span className='ml-2 text-danger'>3000000 VNĐ</span>
+                        </div>
+                        <div className="card">
+                            <div className='card-img-top pl-2 text-secondary'>
+                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
+                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
                             </div>
-                            <div>
-                                <button style={{fontSize:14}} className='btn btn-info mr-1'>
-                                <i class="fa fa-edit"></i>
-                                <span className='ml-1'>Chỉnh sửa</span>
-                                </button>
-                                <button style={{fontSize:14}} className='btn btn-danger'>
-                                <i class="fa fa-trash"></i>
-                                <span className='ml-1'>Xóa</span>
-                                </button>
+                            <div className="card-body pl-2">
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
+                                </div>
+                                <div className='my-4 text-secondary'>
+                                    <i class="fa fa-user"></i>
+                                    <span className='ml-2'>Thiên Anh</span>
+
+                                </div>
+                                <div className='my-3'>
+                                    <i className='text-secondary' class="fa fa-money-bill"></i>
+                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
+                                </div>
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
+                                        <i class="fa fa-edit"></i>
+                                        <span className='ml-1'>Chỉnh sửa</span>
+                                    </button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
+                                        <i class="fa fa-trash"></i>
+                                        <span className='ml-1'>Xóa</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className='card-img-top pl-2 text-secondary'>
+                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
+                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
+                            </div>
+                            <div className="card-body pl-2">
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
+                                </div>
+                                <div className='my-4 text-secondary'>
+                                    <i class="fa fa-user"></i>
+                                    <span className='ml-2'>Thiên Anh</span>
+
+                                </div>
+                                <div className='my-3'>
+                                    <i className='text-secondary' class="fa fa-money-bill"></i>
+                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
+                                </div>
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
+                                        <i class="fa fa-edit"></i>
+                                        <span className='ml-1'>Chỉnh sửa</span>
+                                    </button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
+                                        <i class="fa fa-trash"></i>
+                                        <span className='ml-1'>Xóa</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className='card-img-top pl-2 text-secondary'>
+                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
+                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
+                            </div>
+                            <div className="card-body pl-2">
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
+                                </div>
+                                <div className='my-4 text-secondary'>
+                                    <i class="fa fa-user"></i>
+                                    <span className='ml-2'>Thiên Anh</span>
+
+                                </div>
+                                <div className='my-3'>
+                                    <i className='text-secondary' class="fa fa-money-bill"></i>
+                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
+                                </div>
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
+                                        <i class="fa fa-edit"></i>
+                                        <span className='ml-1'>Chỉnh sửa</span>
+                                    </button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
+                                        <i class="fa fa-trash"></i>
+                                        <span className='ml-1'>Xóa</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className='card-img-top pl-2 text-secondary'>
+                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
+                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
+                            </div>
+                            <div className="card-body pl-2">
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
+                                </div>
+                                <div className='my-4 text-secondary'>
+                                    <i class="fa fa-user"></i>
+                                    <span className='ml-2'>Thiên Anh</span>
+
+                                </div>
+                                <div className='my-3'>
+                                    <i className='text-secondary' class="fa fa-money-bill"></i>
+                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
+                                </div>
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
+                                        <i class="fa fa-edit"></i>
+                                        <span className='ml-1'>Chỉnh sửa</span>
+                                    </button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
+                                        <i class="fa fa-trash"></i>
+                                        <span className='ml-1'>Xóa</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className='card-img-top pl-2 text-secondary'>
+                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
+                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
+                            </div>
+                            <div className="card-body pl-2">
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
+                                </div>
+                                <div className='my-4 text-secondary'>
+                                    <i class="fa fa-user"></i>
+                                    <span className='ml-2'>Thiên Anh</span>
+
+                                </div>
+                                <div className='my-3'>
+                                    <i className='text-secondary' class="fa fa-money-bill"></i>
+                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
+                                </div>
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
+                                        <i class="fa fa-edit"></i>
+                                        <span className='ml-1'>Chỉnh sửa</span>
+                                    </button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
+                                        <i class="fa fa-trash"></i>
+                                        <span className='ml-1'>Xóa</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className='card-img-top pl-2 text-secondary'>
+                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
+                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
+                            </div>
+                            <div className="card-body pl-2">
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
+                                </div>
+                                <div className='my-4 text-secondary'>
+                                    <i class="fa fa-user"></i>
+                                    <span className='ml-2'>Thiên Anh</span>
+
+                                </div>
+                                <div className='my-3'>
+                                    <i className='text-secondary' class="fa fa-money-bill"></i>
+                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
+                                </div>
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
+                                        <i class="fa fa-edit"></i>
+                                        <span className='ml-1'>Chỉnh sửa</span>
+                                    </button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
+                                        <i class="fa fa-trash"></i>
+                                        <span className='ml-1'>Xóa</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className='card-img-top pl-2 text-secondary'>
+                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
+                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
+                            </div>
+                            <div className="card-body pl-2">
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
+                                </div>
+                                <div className='my-4 text-secondary'>
+                                    <i class="fa fa-user"></i>
+                                    <span className='ml-2'>Thiên Anh</span>
+
+                                </div>
+                                <div className='my-3'>
+                                    <i className='text-secondary' class="fa fa-money-bill"></i>
+                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
+                                </div>
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
+                                        <i class="fa fa-edit"></i>
+                                        <span className='ml-1'>Chỉnh sửa</span>
+                                    </button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
+                                        <i class="fa fa-trash"></i>
+                                        <span className='ml-1'>Xóa</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className='card-img-top pl-2 text-secondary'>
+                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
+                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
+                            </div>
+                            <div className="card-body pl-2">
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
+                                </div>
+                                <div className='my-4 text-secondary'>
+                                    <i class="fa fa-user"></i>
+                                    <span className='ml-2'>Thiên Anh</span>
+
+                                </div>
+                                <div className='my-3'>
+                                    <i className='text-secondary' class="fa fa-money-bill"></i>
+                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
+                                </div>
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
+                                        <i class="fa fa-edit"></i>
+                                        <span className='ml-1'>Chỉnh sửa</span>
+                                    </button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
+                                        <i class="fa fa-trash"></i>
+                                        <span className='ml-1'>Xóa</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className='card-img-top pl-2 text-secondary'>
+                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
+                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
+                            </div>
+                            <div className="card-body pl-2">
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
+                                </div>
+                                <div className='my-4 text-secondary'>
+                                    <i class="fa fa-user"></i>
+                                    <span className='ml-2'>Thiên Anh</span>
+
+                                </div>
+                                <div className='my-3'>
+                                    <i className='text-secondary' class="fa fa-money-bill"></i>
+                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
+                                </div>
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
+                                        <i class="fa fa-edit"></i>
+                                        <span className='ml-1'>Chỉnh sửa</span>
+                                    </button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
+                                        <i class="fa fa-trash"></i>
+                                        <span className='ml-1'>Xóa</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card">
+                            <div className='card-img-top pl-2 text-secondary'>
+                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
+                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
+                            </div>
+                            <div className="card-body pl-2">
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
+                                </div>
+                                <div className='my-4 text-secondary'>
+                                    <i class="fa fa-user"></i>
+                                    <span className='ml-2'>Thiên Anh</span>
+
+                                </div>
+                                <div className='my-3'>
+                                    <i className='text-secondary' class="fa fa-money-bill"></i>
+                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
+                                </div>
+                                <div>
+                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
+                                        <i class="fa fa-edit"></i>
+                                        <span className='ml-1'>Chỉnh sửa</span>
+                                    </button>
+                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
+                                        <i class="fa fa-trash"></i>
+                                        <span className='ml-1'>Xóa</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                   </div>
 
                 </div>
             </div>

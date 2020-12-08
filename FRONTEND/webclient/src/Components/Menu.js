@@ -34,6 +34,10 @@ export default class Menu extends Component {
                         <i className='text-size' class="fa fa-money-bill"></i>
                         <a className='ml-4'>Hóa đơn</a>
                     </li>
+                    <li className='py-2 pl-2 li-hover'>
+                        <i className='text-size' class="fa fa-money-bill"></i>
+                        <a className='ml-4'>Khách Thuê</a>
+                    </li>
                 </ul>
             </div>
         )
