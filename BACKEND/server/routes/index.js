@@ -38,5 +38,19 @@ router.get('/getdata01', function(req, res, next) {
 });
 
 
+router.get('/getAllPhong', function(req, res, next) {
+  pool
+  .query('SELECT * FROM phong')
+  .then(respond => res.send(respond.rows))
+  .catch(error =>
+    setImmediate(() => {
+      throw error
+    })
+  )
+  
+});
+
+
+
 
 module.exports = router;
