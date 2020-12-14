@@ -1,7 +1,82 @@
 import React, { Component } from 'react'
+import axios from 'axios';
+import { connect } from 'react-redux'
 
-export default class DanhSachPhong extends Component {
-    render() {
+
+
+class DanhSachPhong extends Component {
+
+    layDanhSachPhong = () => {
+        return axios.get('http://localhost:4000/getAllPhong').then(res => res.data).catch(err => { console.log(err); })
+    }
+
+    
+    componentDidMount() {
+        if (this.props.mangPhong === null) {
+           this.layDanhSachPhong().then( data => this.props.dispatch({
+               type: "GET_DANHSACH_PHONG",
+               data
+           }))
+        }
+    }
+
+
+
+
+    // renderDanhSachPhong = () => {
+    //     return this.props.mangPhong.map((phong, index) => {
+    //         return <div className="card" key={index}>
+    //             <div className='card-img-top pl-2 text-secondary'>
+    //                 <i style={{ fontSize: 20 }} class="fa fa-home"></i>
+    //                 <span className='ml-2' style={{ fontSize: 20 }}>{phong.maphong}</span>
+    //             </div>
+    //             <div className="card-body pl-2">
+    //                 <div>
+    //                     <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
+    //                     <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
+    //                     <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
+    //                 </div>
+    //                 <div className='my-4 text-secondary'>
+    //                     <i class="fa fa-user"></i>
+    //                     <span className='ml-2'>Thiên Anh</span>
+
+    //                 </div>
+    //                 <div className='my-3'>
+    //                     <i className='text-secondary' class="fa fa-money-bill"></i>
+    //                     <span className='ml-2 text-danger'>{phong.giaphong} VNĐ</span>
+    //                 </div>
+    //                 <div>
+    //                     <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
+    //                         <i class="fa fa-edit"></i>
+    //                         <span className='ml-1'>Chỉnh sửa</span>
+    //                     </button>
+    //                     <button style={{ fontSize: 14 }} className='btn btn-danger'>
+    //                         <i class="fa fa-trash"></i>
+    //                         <span className='ml-1'>Xóa</span>
+    //                     </button>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     })
+    // }
+
+    renderDanhSachPhong = () => {
+        if(this.props.mangPhong !== null) {
+            return this.props.mangPhong.map((phong, index) => {
+                return <tr key={index}>
+                    <td>{phong.maphong}</td>
+                    <td>{phong.dientich}</td>
+                    <td>{phong.succhua}</td>
+                    <td>{(phong.giaphong).toLocaleString()} VNĐ</td>
+                    <td></td>
+                </tr>
+            })
+        }
+       
+    }
+    
+    render() {  
+        console.log(this.layDanhSachPhong());
         return (
             <div>
                 <h3 className='text-secondary'>Danh Sách Phòng</h3>
@@ -27,364 +102,39 @@ export default class DanhSachPhong extends Component {
                 <div className='text-right'>
                     <button className='btn btn-success my-2 mr-4'><i class="fa fa-bed"></i><span className='ml-2'>Thêm phòng</span></button>
                 </div>
-                <div className='row border-top pt-3'>
+                {/* <div className='row border-top pt-3'>
                     <div className='col-2 px-0 pl-2'>
-                        <div className="card">
-                            <div className='card-img-top pl-2 text-secondary'>
-                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
-                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
-                            </div>
-                            <div className="card-body pl-2">
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
-                                </div>
-                                <div className='my-4 text-secondary'>
-                                    <i class="fa fa-user"></i>
-                                    <span className='ml-2'>Thiên Anh</span>
+                        {this.renderDanhSachPhong()}
 
-                                </div>
-                                <div className='my-3'>
-                                    <i className='text-secondary' class="fa fa-money-bill"></i>
-                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
-                                </div>
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
-                                        <i class="fa fa-edit"></i>
-                                        <span className='ml-1'>Chỉnh sửa</span>
-                                    </button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
-                                        <i class="fa fa-trash"></i>
-                                        <span className='ml-1'>Xóa</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className='card-img-top pl-2 text-secondary'>
-                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
-                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
-                            </div>
-                            <div className="card-body pl-2">
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
-                                </div>
-                                <div className='my-4 text-secondary'>
-                                    <i class="fa fa-user"></i>
-                                    <span className='ml-2'>Thiên Anh</span>
 
-                                </div>
-                                <div className='my-3'>
-                                    <i className='text-secondary' class="fa fa-money-bill"></i>
-                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
-                                </div>
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
-                                        <i class="fa fa-edit"></i>
-                                        <span className='ml-1'>Chỉnh sửa</span>
-                                    </button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
-                                        <i class="fa fa-trash"></i>
-                                        <span className='ml-1'>Xóa</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className='card-img-top pl-2 text-secondary'>
-                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
-                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
-                            </div>
-                            <div className="card-body pl-2">
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
-                                </div>
-                                <div className='my-4 text-secondary'>
-                                    <i class="fa fa-user"></i>
-                                    <span className='ml-2'>Thiên Anh</span>
 
-                                </div>
-                                <div className='my-3'>
-                                    <i className='text-secondary' class="fa fa-money-bill"></i>
-                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
-                                </div>
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
-                                        <i class="fa fa-edit"></i>
-                                        <span className='ml-1'>Chỉnh sửa</span>
-                                    </button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
-                                        <i class="fa fa-trash"></i>
-                                        <span className='ml-1'>Xóa</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className='card-img-top pl-2 text-secondary'>
-                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
-                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
-                            </div>
-                            <div className="card-body pl-2">
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
-                                </div>
-                                <div className='my-4 text-secondary'>
-                                    <i class="fa fa-user"></i>
-                                    <span className='ml-2'>Thiên Anh</span>
 
-                                </div>
-                                <div className='my-3'>
-                                    <i className='text-secondary' class="fa fa-money-bill"></i>
-                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
-                                </div>
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
-                                        <i class="fa fa-edit"></i>
-                                        <span className='ml-1'>Chỉnh sửa</span>
-                                    </button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
-                                        <i class="fa fa-trash"></i>
-                                        <span className='ml-1'>Xóa</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className='card-img-top pl-2 text-secondary'>
-                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
-                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
-                            </div>
-                            <div className="card-body pl-2">
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
-                                </div>
-                                <div className='my-4 text-secondary'>
-                                    <i class="fa fa-user"></i>
-                                    <span className='ml-2'>Thiên Anh</span>
-
-                                </div>
-                                <div className='my-3'>
-                                    <i className='text-secondary' class="fa fa-money-bill"></i>
-                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
-                                </div>
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
-                                        <i class="fa fa-edit"></i>
-                                        <span className='ml-1'>Chỉnh sửa</span>
-                                    </button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
-                                        <i class="fa fa-trash"></i>
-                                        <span className='ml-1'>Xóa</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className='card-img-top pl-2 text-secondary'>
-                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
-                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
-                            </div>
-                            <div className="card-body pl-2">
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
-                                </div>
-                                <div className='my-4 text-secondary'>
-                                    <i class="fa fa-user"></i>
-                                    <span className='ml-2'>Thiên Anh</span>
-
-                                </div>
-                                <div className='my-3'>
-                                    <i className='text-secondary' class="fa fa-money-bill"></i>
-                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
-                                </div>
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
-                                        <i class="fa fa-edit"></i>
-                                        <span className='ml-1'>Chỉnh sửa</span>
-                                    </button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
-                                        <i class="fa fa-trash"></i>
-                                        <span className='ml-1'>Xóa</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className='card-img-top pl-2 text-secondary'>
-                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
-                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
-                            </div>
-                            <div className="card-body pl-2">
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
-                                </div>
-                                <div className='my-4 text-secondary'>
-                                    <i class="fa fa-user"></i>
-                                    <span className='ml-2'>Thiên Anh</span>
-
-                                </div>
-                                <div className='my-3'>
-                                    <i className='text-secondary' class="fa fa-money-bill"></i>
-                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
-                                </div>
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
-                                        <i class="fa fa-edit"></i>
-                                        <span className='ml-1'>Chỉnh sửa</span>
-                                    </button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
-                                        <i class="fa fa-trash"></i>
-                                        <span className='ml-1'>Xóa</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className='card-img-top pl-2 text-secondary'>
-                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
-                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
-                            </div>
-                            <div className="card-body pl-2">
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
-                                </div>
-                                <div className='my-4 text-secondary'>
-                                    <i class="fa fa-user"></i>
-                                    <span className='ml-2'>Thiên Anh</span>
-
-                                </div>
-                                <div className='my-3'>
-                                    <i className='text-secondary' class="fa fa-money-bill"></i>
-                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
-                                </div>
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
-                                        <i class="fa fa-edit"></i>
-                                        <span className='ml-1'>Chỉnh sửa</span>
-                                    </button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
-                                        <i class="fa fa-trash"></i>
-                                        <span className='ml-1'>Xóa</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className='card-img-top pl-2 text-secondary'>
-                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
-                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
-                            </div>
-                            <div className="card-body pl-2">
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
-                                </div>
-                                <div className='my-4 text-secondary'>
-                                    <i class="fa fa-user"></i>
-                                    <span className='ml-2'>Thiên Anh</span>
-
-                                </div>
-                                <div className='my-3'>
-                                    <i className='text-secondary' class="fa fa-money-bill"></i>
-                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
-                                </div>
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
-                                        <i class="fa fa-edit"></i>
-                                        <span className='ml-1'>Chỉnh sửa</span>
-                                    </button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
-                                        <i class="fa fa-trash"></i>
-                                        <span className='ml-1'>Xóa</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className='card-img-top pl-2 text-secondary'>
-                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
-                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
-                            </div>
-                            <div className="card-body pl-2">
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
-                                </div>
-                                <div className='my-4 text-secondary'>
-                                    <i class="fa fa-user"></i>
-                                    <span className='ml-2'>Thiên Anh</span>
-
-                                </div>
-                                <div className='my-3'>
-                                    <i className='text-secondary' class="fa fa-money-bill"></i>
-                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
-                                </div>
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
-                                        <i class="fa fa-edit"></i>
-                                        <span className='ml-1'>Chỉnh sửa</span>
-                                    </button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
-                                        <i class="fa fa-trash"></i>
-                                        <span className='ml-1'>Xóa</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className='card-img-top pl-2 text-secondary'>
-                                <i style={{ fontSize: 20 }} class="fa fa-home"></i>
-                                <span className='ml-2' style={{ fontSize: 20 }}>1</span>
-                            </div>
-                            <div className="card-body pl-2">
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-success px-2 mr-1'>Trả</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-secondary px-2 mr-1'>Xem</button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info px-2'>Sửa</button>
-                                </div>
-                                <div className='my-4 text-secondary'>
-                                    <i class="fa fa-user"></i>
-                                    <span className='ml-2'>Thiên Anh</span>
-
-                                </div>
-                                <div className='my-3'>
-                                    <i className='text-secondary' class="fa fa-money-bill"></i>
-                                    <span className='ml-2 text-danger'>3000000 VNĐ</span>
-                                </div>
-                                <div>
-                                    <button style={{ fontSize: 14 }} className='btn btn-info mr-1'>
-                                        <i class="fa fa-edit"></i>
-                                        <span className='ml-1'>Chỉnh sửa</span>
-                                    </button>
-                                    <button style={{ fontSize: 14 }} className='btn btn-danger'>
-                                        <i class="fa fa-trash"></i>
-                                        <span className='ml-1'>Xóa</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
-                </div>
+                </div> */}
+                <table className='table'>
+                    <thead className='thead-dark'>
+                        <tr>
+                            <th>Số Phòng</th>
+                            <th>Diện tích</th>
+                            <th>Sức chứa</th>
+                            <th>Giá Phòng</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderDanhSachPhong()}
+                    </tbody>
+                </table>
             </div>
         )
     }
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        mangPhong: state.PhongReducer.mangPhong
+    }
+}
+export default connect(mapStateToProps)(DanhSachPhong)

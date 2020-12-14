@@ -6,12 +6,20 @@ import Home from './Components/Home';
 import FormDangKy from './Components/TaiKhoan/FormDangKy';
 import FormDangNhap from './Components/TaiKhoan/FormDangNhap';
 import FormDoiMatKhau from './Components/TaiKhoan/FormDoiMatKhau';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import DanhSachPhong from './Components/Phong/DanhSachPhong';
+import FormHopDong from './Components/HopDong/FormHopDong';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <FormHoaDon></FormHoaDon>
-    </div>
+    <BrowserRouter>
+      <Switch>
+      <Route path='/' exact component={DanhSachPhong} />
+      <Route path='/login' exact component={FormDangNhap} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

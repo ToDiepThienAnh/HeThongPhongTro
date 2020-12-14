@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-
 export default class Menu extends Component {
     render() {
         return (
-            <div className='text-white'>
+            
+                <div className='text-white'>
                 <h3 className='text-center'>Quản lí Phòng Trọ</h3>
                 <p className='text-center'>Simple House</p>
                 <span className='text-center'>Xin chào Thiên Anh</span>
@@ -40,6 +40,7 @@ export default class Menu extends Component {
                     </li>
                 </ul>
             </div>
+            
         )
     }
 }

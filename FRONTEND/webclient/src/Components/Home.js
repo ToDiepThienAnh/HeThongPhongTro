@@ -21,7 +21,7 @@ export default class Home extends Component {
                         {/* <ServicesList></ServicesList> */}
                         {/* <DanhSachPhong></DanhSachPhong> */}
                         {/* <FormKhachThue></FormKhachThue> */}
-                        <FormHopDong></FormHopDong>
+                        {/* <FormHopDong></FormHopDong> */}
                     </div>
                 </div>
             </div>
