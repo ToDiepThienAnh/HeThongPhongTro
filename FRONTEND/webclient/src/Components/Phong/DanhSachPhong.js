@@ -6,21 +6,30 @@ import { connect } from 'react-redux'
 
 class DanhSachPhong extends Component {
 
+    // state = {
+    //     mangPhong: null
+    // }
+
     layDanhSachPhong = () => {
-        return axios.get('http://localhost:4000/getAllPhong').then(res => res.data).catch(err => { console.log(err); })
+        axios.get('http://localhost:4000/getAllPhong').then(res => this.props.fetchRooms(res.data)).catch(err => { console.log(err); })
     }
 
-    
+    // static getDerivedStateFromProps() {
+    //     if (this.props.mangPhong === null) {
+    //            this.layDanhSachPhong().then(data => {
+    //                this.props.fetchRooms(data)
+    //            }).catch( err => console.log(err))
+            
+    //     }
+    // }
+    // static getDerivedStateFromProps(props, state) {
+        
+    // }
+
     componentDidMount() {
-        if (this.props.mangPhong === null) {
-           this.layDanhSachPhong().then( data => this.props.dispatch({
-               type: "GET_DANHSACH_PHONG",
-               data
-           }))
-        }
+        this.layDanhSachPhong();
     }
-
-
+    
 
 
     // renderDanhSachPhong = () => {
@@ -60,23 +69,24 @@ class DanhSachPhong extends Component {
     //     })
     // }
 
-    renderDanhSachPhong = () => {
-        if(this.props.mangPhong !== null) {
-            return this.props.mangPhong.map((phong, index) => {
-                return <tr key={index}>
-                    <td>{phong.maphong}</td>
-                    <td>{phong.dientich}</td>
-                    <td>{phong.succhua}</td>
-                    <td>{(phong.giaphong).toLocaleString()} VNĐ</td>
-                    <td></td>
-                </tr>
-            })
-        }
-       
-    }
-    
-    render() {  
-        console.log(this.layDanhSachPhong());
+    // renderDanhSachPhong = () => {
+    //     if(this.props.mangPhong !== null) {
+    //         return this.props.mangPhong.map((phong, index) => {
+    //             return <tr key={index}>
+    //                 <td>{phong.maphong}</td>
+    //                 <td>{phong.dientich}</td>
+    //                 <td>{phong.succhua}</td>
+    //                 <td>{(phong.giaphong).toLocaleString()} VNĐ</td>
+    //                 <td></td>
+    //             </tr>
+    //         })
+    //     }
+
+    // }
+
+    render() {
+        console.log('fewfw', this.props.mangPhong);
+
         return (
             <div>
                 <h3 className='text-secondary'>Danh Sách Phòng</h3>
@@ -123,7 +133,7 @@ class DanhSachPhong extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.renderDanhSachPhong()}
+                        {/* {this.renderDanhSachPhong()} */}
                     </tbody>
                 </table>
             </div>
@@ -137,4 +147,16 @@ const mapStateToProps = (state) => {
         mangPhong: state.PhongReducer.mangPhong
     }
 }
-export default connect(mapStateToProps)(DanhSachPhong)
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchRooms: (data) => {
+            dispatch({
+                type: "GET_DANHSACH_PHONG",
+                data
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(DanhSachPhong)

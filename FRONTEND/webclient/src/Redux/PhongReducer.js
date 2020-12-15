@@ -9,11 +9,14 @@ const PhongReducer = (state = stateDefault,action) => {
     
     switch(action.type){
         case "GET_DANHSACH_PHONG":{
+            console.log('data', action);
+
             state.mangPhong = {...action.data}
             return {...state}
         }
+        default:
+            return {...state}
     }
-    return {...state}
 }
 
 
