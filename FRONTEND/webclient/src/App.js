@@ -1,26 +1,21 @@
-
-import './App.css';
-import DanhSachHoaDon from './Components/HoaDon/DanhSachHoaDon';
-import FormHoaDon from './Components/HoaDon/FormHoaDon';
-import Home from './Components/Home';
-import FormDangKy from './Components/TaiKhoan/FormDangKy';
-import FormDangNhap from './Components/TaiKhoan/FormDangNhap';
-import FormDoiMatKhau from './Components/TaiKhoan/FormDoiMatKhau';
+// Libraries
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import DanhSachPhong from './Components/Phong/DanhSachPhong';
-import FormHopDong from './Components/HopDong/FormHopDong';
 
+// Css
+import './App.css';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'y
 
+// Components
+import Layout from './Components/Layout';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Switch>
-      <Route path='/' exact component={DanhSachPhong} />
-      <Route path='/login' exact component={FormDangNhap} />
-      </Switch>
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<Switch>
+				<Route path='/' component={Layout} />
+			</Switch>
+		</BrowserRouter>
+	);
 }
 
 export default App;

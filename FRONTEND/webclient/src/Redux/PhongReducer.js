@@ -5,17 +5,23 @@ const stateDefault = {
     mangPhong: []
 }
 
-const PhongReducer = (state = stateDefault,action) => {
-    
-    switch(action.type){
-        case "GET_DANHSACH_PHONG":{
-            console.log('data', action);
+const PhongReducer = (state = stateDefault, action) => {
 
-            state.mangPhong = {...action.data}
-            return {...state}
+    switch (action.type) {
+        case "SET_DANHSACH_PHONG": {
+            let newMangPhong = [];
+
+            newMangPhong = action.data.map(phong => ({
+                ...phong,
+                key: phong.maphong,
+            }))
+
+            state.mangPhong = [...newMangPhong]
+
+            return { ...state }
         }
         default:
-            return {...state}
+            return { ...state }
     }
 }
 
