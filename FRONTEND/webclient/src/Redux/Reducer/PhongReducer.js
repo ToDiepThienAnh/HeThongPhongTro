@@ -1,3 +1,4 @@
+import { SET_DANHSACH_PHONG } from "../type/type";
 
 
 const stateDefault = {
@@ -8,12 +9,13 @@ const stateDefault = {
 const PhongReducer = (state = stateDefault, action) => {
 
     switch (action.type) {
-        case "SET_DANHSACH_PHONG": {
+        case SET_DANHSACH_PHONG: {
             let newMangPhong = [];
 
             newMangPhong = action.data.map(phong => ({
                 ...phong,
                 key: phong.maphong,
+                options: {}
             }))
 
             state.mangPhong = [...newMangPhong]

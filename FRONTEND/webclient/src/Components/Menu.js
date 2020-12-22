@@ -45,7 +45,7 @@ export default class Menu extends Component {
                     </li>
                     <li className='py-2 pl-2 li-hover'>
                         <i className='text-size fa fa-user-tie'></i>
-                        <Link className='ml-4 text-white'>Nhân Viên</Link>
+                        <Link to="/NhanVien" className='ml-4 text-white'>Nhân Viên</Link>
                     </li>
                 </ul>
             </div>

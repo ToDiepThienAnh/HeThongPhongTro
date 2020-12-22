@@ -11,6 +11,9 @@ import ServicesList from './DichVu/ServicesList'
 import FormHopDong from './HopDong/FormHopDong'
 import DanhSachHoaDon from './HoaDon/DanhSachHoaDon'
 import DanhSachTaiSan from './TaiSan/DanhSachTaiSan'
+import DanhSachKhachThue from './KhachThue/DanhSachKhachThue'
+import DanhSachHopDong from './HopDong/DanhSachHopDong'
+import DanhSachTaiKhoan from './TaiKhoan/DanhSachTaiKhoan'
 
 export default class Home extends Component {
     render() {
@@ -27,11 +30,11 @@ export default class Home extends Component {
                         <Switch>
                             <Route path='/DichVu' exact component={ServicesList} />
                             <Route path='/HoaDon' exact component={DanhSachHoaDon} />
-                            <Route path='/HopDong' exact component={FormHopDong} />
+                            <Route path='/HopDong' exact component={DanhSachHopDong} />
                             <Route path='/Phong' exact component={DanhSachPhong} />
-                            <Route path='/KhachThue' exact component={FormKhachThue} />
-
-
+                            <Route path='/KhachThue' exact component={DanhSachKhachThue} />
+                            <Route path='/NhanVien' exact component={DanhSachTaiKhoan} />
+                            <Route path='/Phong/themHopDong' exact component={FormHopDong} />
                             <Redirect to='/Phong' />
                         </Switch>
                         {/* <ServicesList></ServicesList> */}

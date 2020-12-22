@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { connect } from 'react-redux'
 import { Table, Button } from 'antd';
+import { SET_DANHSACH_PHONG } from '../../Redux/type/type';
 
 
 const columns = [
@@ -27,22 +28,19 @@ const columns = [
         key: 'giaphong',
         render: (giaPhong) => <div>{giaPhong} VNĐ</div>
     },
-    // {
-    //     title: 'Cập Nhật',
-    //     dataIndex: '',
-    //     key: 'capNhat',
-    //     render: (<div>
-    //         <Button type="primary" danger>
-    //             Primary
-    // </Button>
-    //         <Button type="primary" danger>
-    //             Primary
-    // </Button>
-    //         <Button type="primary" danger>
-    //             Primary
-    // </Button>
-    //     </div>)
-    // }
+    {
+        title: '',
+        dataIndex: 'options',
+        key: 'options',
+        render: () => (
+            <div>
+                <Button type='primary'>Xem chi tiết</Button> &nbsp;
+                <Button danger>Xóa</Button> &nbsp;
+                <Button>Sửa</Button>
+            </div>
+        )
+    },
+
 ];
 
 // const data = [];
@@ -65,7 +63,7 @@ class DanhSachPhong extends Component {
 
     layDanhSachPhong = () => {
         axios.get('http://localhost:4000/getAllPhong').then(res => this.props.dispatch({
-            type: "SET_DANHSACH_PHONG",
+            type: SET_DANHSACH_PHONG,
             data: res.data
         })).catch(err => { console.log(err); })
     }
@@ -92,7 +90,7 @@ class DanhSachPhong extends Component {
     }
 
     render() {
-        console.log('fewfw', this.props.mangPhong);
+        // console.log('mảng Phòng', this.props.mangPhong);
 
         return (
             <div>
