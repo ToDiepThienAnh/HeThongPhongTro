@@ -2,9 +2,15 @@ import React, { Component } from 'react'
 
 
 export default class FormHopDong extends Component {
+
+    handleChangeInput = (event) => {
+
+    }
+
     render() {
         return (
             <div>
+                <h3 className='text-secondary py-2'>Lập Hợp Đồng Mới</h3>
                 <div className='row text-secondary'>
                     <div className='col-6'>
                         <div className="form-group row px-2">
@@ -38,12 +44,12 @@ export default class FormHopDong extends Component {
                     <div className='col-6'>
                         <div className="form-group row px-2">
                             <div className='col-4 pr-0'><p>Ngày Tạo HĐ</p></div>
-                            <div className='col-8 pl-0'><input type="text" className="form-control" /></div>
+                            <div className='col-8 pl-0'><input type="date" className="form-control" /></div>
 
                         </div>
                         <div className="form-group row px-2">
                             <div className='col-4 pr-0'><p>Ngày Hết Hạn HĐ</p></div>
-                            <div className='col-8 pl-0'><input type="text" className="form-control" /></div>
+                            <div className='col-8 pl-0'><input type="date" className="form-control" /></div>
 
                         </div>
                     </div>

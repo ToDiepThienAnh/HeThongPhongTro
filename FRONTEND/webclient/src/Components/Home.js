@@ -14,6 +14,7 @@ import DanhSachTaiSan from './TaiSan/DanhSachTaiSan'
 import DanhSachKhachThue from './KhachThue/DanhSachKhachThue'
 import DanhSachHopDong from './HopDong/DanhSachHopDong'
 import DanhSachTaiKhoan from './TaiKhoan/DanhSachTaiKhoan'
+import FormPhong from './Phong/FormPhong'
 
 export default class Home extends Component {
     render() {
@@ -34,7 +35,10 @@ export default class Home extends Component {
                             <Route path='/Phong' exact component={DanhSachPhong} />
                             <Route path='/KhachThue' exact component={DanhSachKhachThue} />
                             <Route path='/NhanVien' exact component={DanhSachTaiKhoan} />
-                            <Route path='/Phong/themHopDong' exact component={FormHopDong} />
+                            {/* Form Nhập thông tin */}
+                            <Route path='/HopDong/themHopDong' exact component={FormHopDong} />
+                            <Route path='/Phong/themPhong' exact component={FormPhong} />
+                            <Route path='/KhachThue/themKhachThue' exact component={FormKhachThue} />
                             <Redirect to='/Phong' />
                         </Switch>
                         {/* <ServicesList></ServicesList> */}

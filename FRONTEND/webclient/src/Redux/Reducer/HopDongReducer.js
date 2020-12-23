@@ -2,7 +2,21 @@ import { SET_DANHSACH_HOPDONG } from "../type/type";
 
 
 const stateDefault = {
-    mangHopDong: []
+    mangHopDong: [],
+    HopDong: {
+        values: {
+            ngaythue: '',
+            ngayhethan: '',
+            thoihan: '',
+            kythanhtoan: ''
+        },
+        errors: {
+            ngaythue: '',
+            ngayhethan: '',
+            thoihan: '',
+            kythanhtoan: ''
+        }
+    }
 }
 
 const HoaDonReducer = (state = stateDefault, action) => {
