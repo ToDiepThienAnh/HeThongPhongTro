@@ -4,8 +4,8 @@ export default class FormDangKy extends Component {
     render() {
         return (
             <div className='bgLogin'>
-                <div style={{ backgroundColor: 'rgba(0,0,0,0.6)', position: 'fixed', width: '100%', height: "100%"}}>
-                    <div style={{ height:500, transform:" translateY(50px)", width:500}} className='container bg-light px-0'>
+                <div style={{ backgroundColor: 'rgba(0,0,0,0.6)', position: 'fixed', width: '100%', height: "100%" }}>
+                    <div style={{ height: 500, transform: " translateY(50px)", width: 500 }} className='container bg-light px-0'>
                         <h3 className='text-center bg-light text-secondary py-3'>Đăng Ký</h3>
                         <div className='form-group mt-4 px-2'>
                             <input className='form-control' placeholder='Nhập Họ tên' type='text'></input>

@@ -1,23 +1,15 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 
-
-export default class FormHopDong extends Component {
-
-    handleChangeInput = (event) => {
-
-    }
-
+export default class ChiTietHopDong extends Component {
     render() {
         return (
             <div>
-                <h3 className='text-secondary py-2'>Lập Hợp Đồng Mới</h3>
+                <h3 className='text-secondary py-2'>Chi Tiết Hợp Đồng </h3>
                 <div className='text-right mb-4 mr-4'>
-                    <Link to="/HopDong">
-                        <button className='btn btn-warning  text-white'>
-                            <i className="fa fa-reply mr-2"></i>
-                            <span>Quay về</span>
-                        </button></Link>
+                    <button className='btn btn-warning  text-white'>
+                        <i className="fa fa-reply mr-2"></i>
+                        <span>Quay về</span>
+                    </button>
                 </div>
                 <form>
                     <div className='row text-secondary'>

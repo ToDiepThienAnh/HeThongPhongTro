@@ -48,7 +48,8 @@ const columns = [
             <div>
 
                 <Button danger>Xóa</Button> &nbsp;
-                <Button type='primary'>Sửa</Button>
+                <Link to="HopDong/editHopDong">
+                    <Button type='primary'>Sửa</Button></Link>
             </div>
         )
     },
@@ -78,14 +79,14 @@ class DanhSachHopDong extends Component {
     // }
 
     render() {
-        console.log("mảng hợp đồng", this.props.mangHopDong);
+        // console.log("mảng hợp đồng", this.props.mangHopDong);
         return (
             <div>
                 <div>
                     <h3 className='text-secondary'>Danh Sách Hợp Đồng Thuê</h3>
                     <div className='text-right mb-4'>
 
-                        <Link to="'/Phong/themHopDong'" className='btn btn-success'>Tạo Hợp Đồng</Link>
+                        <Link to="/HopDong/themHopDong" className='btn btn-success'>Tạo Hợp Đồng</Link>
                     </div>
 
                     <Table columns={columns} dataSource={this.props.mangHopDong} />

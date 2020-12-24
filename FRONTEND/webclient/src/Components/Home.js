@@ -13,8 +13,20 @@ import DanhSachHoaDon from './HoaDon/DanhSachHoaDon'
 import DanhSachTaiSan from './TaiSan/DanhSachTaiSan'
 import DanhSachKhachThue from './KhachThue/DanhSachKhachThue'
 import DanhSachHopDong from './HopDong/DanhSachHopDong'
-import DanhSachTaiKhoan from './TaiKhoan/DanhSachTaiKhoan'
+import DanhSachTaiKhoan from './NhanVien/DanhSachTaiKhoan'
 import FormPhong from './Phong/FormPhong'
+import FormDangKy from './NhanVien/FormDangKy'
+import ChiTietHopDong from './HopDong/ChiTietHopDong'
+import ChiTietPhong from './Phong/ChiTietPhong'
+import ChiTietKhachThue from './KhachThue/ChiTietKhachThue'
+import ChinhSuaHopDong from './HopDong/ChinhSuaHopDong'
+import ChiTietHoaDon from './HoaDon/ChiTietHoaDon'
+import ChinhSuaPhong from './Phong/ChinhSuaPhong'
+import ChinhSuaKhachThue from './KhachThue/ChinhSuaKhachThue'
+import ThemTaiSan from './TaiSan/ThemTaiSan'
+import FormHoaDon from './HoaDon/FormHoaDon'
+import ThemNhanVien from './NhanVien/ThemNhanVien'
+import ChinhSuaNhanVien from './NhanVien/ChinhSuaNhanVien'
 
 export default class Home extends Component {
     render() {
@@ -35,10 +47,27 @@ export default class Home extends Component {
                             <Route path='/Phong' exact component={DanhSachPhong} />
                             <Route path='/KhachThue' exact component={DanhSachKhachThue} />
                             <Route path='/NhanVien' exact component={DanhSachTaiKhoan} />
+                            <Route path='/TaiSan' exact component={DanhSachTaiSan} />
                             {/* Form Nhập thông tin */}
                             <Route path='/HopDong/themHopDong' exact component={FormHopDong} />
                             <Route path='/Phong/themPhong' exact component={FormPhong} />
                             <Route path='/KhachThue/themKhachThue' exact component={FormKhachThue} />
+                            <Route path='/NhanVien/DangKy' exact component={FormDangKy} />
+                            <Route path='/HoaDon/themHoaDon' exact component={FormHoaDon} />
+                            <Route path='/DichVu/themDichVu' exact component={FormDichVu} />
+                            <Route path='/TaiSan/themTaiSan' exact component={ThemTaiSan} />
+                            <Route path='/NhanVien/themNhanVien' exact component={ThemNhanVien} />
+                            <Route path='/ChiTiet/:id' exact component={FormPhong} />
+                            {/* ChiTiet  */}
+                            <Route path='/HopDong/chiTietHopDong' exact component={ChiTietHopDong} />
+                            <Route path='/Phong/chiTietPhong/:id' exact component={ChiTietPhong} />
+                            <Route path='/KhachThue/chiTietKhachThue' exact component={ChiTietKhachThue} />
+                            <Route path='/HoaDon/chiTietHoaDon' exact component={ChiTietHoaDon} />
+                            {/* Sửa thông tin */}
+                            <Route path='/HopDong/editHopDong' exact component={ChinhSuaHopDong} />
+                            <Route path='/Phong/editPhong' exact component={ChinhSuaPhong} />
+                            <Route path='/KhachThue/editKhachThue' exact component={ChinhSuaKhachThue} />
+                            <Route path='/NhanVien/editNhanVien' exact component={ChinhSuaNhanVien} />
                             <Redirect to='/Phong' />
                         </Switch>
                         {/* <ServicesList></ServicesList> */}

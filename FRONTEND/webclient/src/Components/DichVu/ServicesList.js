@@ -31,17 +31,16 @@ class ServicesList extends Component {
                     <div className='py-2'>
                         <button className='btn btn-success mr-2'>
                             <i class="fa fa-plus"></i><span className='ml-2'>Thêm dịch vụ</span></button>
-                        <button className='btn btn-danger mr-2'>
-                            <i class="fa fa-times"></i><span className='ml-2'>Xóa</span></button>
+
                     </div>
                 </div>
                 <p className='text-secondary'>Lưu ý:</p>
                 <p>Các dịch vụ phải được gán cho từng khách thuê phòng để khi tính tiền sẽ có tiền dịch vụ đó.
 Để cấu hình đơn giá điện nước tính theo bậc thang bạn vẫn phải tạo 2 dịch vụ là điện, nước; sau đó vào menu "Thiết lập" rồi Tab "Đơn giá điện nước bậc thang" để thiết lập đơn giá.</p>
-                <table className='table table-bordered table-dark'>
+                <table className='table table-bordered'>
                     <thead>
                         <tr>
-                            <th>#</th>
+
                             <th></th>
                             <th>Tên dịch vụ</th>
                             <th>Loại dịch vụ</th>
@@ -53,7 +52,10 @@ class ServicesList extends Component {
                         {this.props.mangDichVu.map((dichvu, index) => {
                             return <tr key={index}>
 
-                                <td></td>
+                                <td className='w-25 text-center'>
+                                    <button className='btn btn-primary mr-2'>Chỉnh Sửa</button>
+                                    <button className='btn btn-danger'>Xóa</button>
+                                </td>
                                 <td>{dichvu.tendichvu}</td>
                                 <td>{dichvu.loaidichvu}</td>
                                 <td>{dichvu.giadichvu}</td>

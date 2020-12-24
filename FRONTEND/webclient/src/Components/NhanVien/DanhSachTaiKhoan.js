@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { Table, Button } from 'antd';
 import { SET_DANHSACH_NHANVIEN } from '../../Redux/type/type';
+import { Link } from 'react-router-dom';
 
 
 const columns = [
@@ -43,7 +44,8 @@ const columns = [
             <div>
 
                 <Button danger>Xóa</Button> &nbsp;
-                <Button type='primary'>Sửa</Button>
+                <Link to="NhanVien/editNhanVien">
+                    <Button type='primary'>Sửa</Button></Link>
             </div>
         )
     },
@@ -70,7 +72,9 @@ class DanhSachTaiKhoan extends Component {
                 <div>
                     <h3 className='text-secondary'>Danh Sách Nhân Viên</h3>
                     <div className='text-right mb-4'>
-                        <button className='btn btn-success'>Thêm Nhân Viên</button>
+                        <Link to="/NhanVien/themNhanVien">
+                            <button className='btn btn-success'>Thêm Nhân Viên</button>
+                        </Link>
                     </div>
 
                     <Table columns={columns} dataSource={this.props.mangNhanVien} />

@@ -19,14 +19,10 @@ export default class Menu extends Component {
                         <Link to='/DichVu' className='text-white ml-4 '>Dịch vụ</Link>
                     </li>
                     <li className='py-2 pl-2 li-hover'>
+                        <i className='text-size fa fa-cube'  ></i>
+                        <Link to="/TaiSan" className='text-white ml-4 '> Tài Sản</Link>
+                    </li>
 
-                        <i className='text-size fa fa-bolt'  ></i>
-                        <Link className='text-white ml-4 '>Chỉ số điện</Link>
-                    </li>
-                    <li className='py-2 pl-2 li-hover'>
-                        <i className='text-size fa fa-shower'></i>
-                        <Link className='text-white ml-4 '>Chỉ số nước</Link>
-                    </li>
                     {/* <li className='py-2 pl-2 li-hover'>
                         <i className='text-size' class="fa fa-calculator"></i>
                         <Link className='text-white ml-4 '>Tính tiền</Link>

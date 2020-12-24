@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux'
 import { Table, Button } from 'antd';
 import { SET_DANHSACH_PHONG } from '../../Redux/type/type';
+import { Link } from 'react-router-dom';
 
 
 const columns = [
@@ -32,11 +33,14 @@ const columns = [
         title: '',
         dataIndex: 'options',
         key: 'options',
-        render: () => (
+        render: (maPhong) => (
             <div>
-                <Button type='primary'>Xem chi tiết</Button> &nbsp;
+                <Link to={`/Phong/chiTietPhong/${maPhong}`}>
+                    <Button type='primary'>Xem chi tiết</Button>
+                </Link> &nbsp;
                 <Button danger>Xóa</Button> &nbsp;
-                <Button>Sửa</Button>
+                <Link to="/Phong/editPhong">
+                    <Button>Sửa</Button></Link>
             </div>
         )
     },
@@ -67,8 +71,6 @@ class DanhSachPhong extends Component {
             data: res.data
         })).catch(err => { console.log(err); })
     }
-
-
 
     componentDidMount() {
         this.layDanhSachPhong();
@@ -115,7 +117,9 @@ class DanhSachPhong extends Component {
                     <span> Đã thu phí 1 |</span>
                 </div>
                 <div className='text-right'>
-                    <button className='btn btn-success my-2 mr-4'><i class="fa fa-bed"></i><span className='ml-2'>Thêm phòng</span></button>
+                    <Link to='/Phong/themPhong'>
+                        <button className='btn btn-success my-2 mr-4'><i class="fa fa-bed"></i><span className='ml-2'>Thêm phòng</span></button>
+                    </Link>
                 </div>
 
                 <Table columns={columns} dataSource={this.props.mangPhong} />

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-export default class FormKhachThue extends Component {
+export default class ChinhSuaKhachThue extends Component {
     render() {
         return (
             <div>
-                <h3 className='text-secondary'>Thêm Khách Thuê</h3>
+                <h3 className='text-secondary'>Chỉnh Sửa Khách Thuê</h3>
                 <div className='text-right mb-4 mr-4'>
                     <Link to="/KhachThue">
                         <button className='btn btn-warning  text-white'>
@@ -80,7 +80,6 @@ export default class FormKhachThue extends Component {
                     </div>
                 </form>
             </div>
-
         )
     }
 }

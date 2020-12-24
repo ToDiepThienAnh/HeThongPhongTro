@@ -12,3 +12,10 @@ export const SET_KHACHHANG = "SET_KHACHHANG"
 export const SET_HOPDONG = "SET_HOPDONG"
 export const SET_DICHVU = "SET_DICHVU"
 export const SET_NHANVIEN = "SET_NHANVIEN"
+
+// THÊM DỮ LIỆU
+export const ADD_PHONG = "ADD_PHONG"
+export const ADD_KHACHHANG = "ADD_KHACHHANG"
+export const ADD_HOPDONG = "ADD_HOPDONG"
+export const ADD_DICHVU = "ADD_DICHVU"
+export const ADD_NHANVIEN = "ADD_NHANVIEN"

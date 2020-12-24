@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux'
 import { Table, Button } from 'antd';
 import { SET_DANHSACH_KHACHHANG } from '../../Redux/type/type';
+import { Link } from 'react-router-dom';
 
 const columns = [
     {
@@ -38,9 +39,13 @@ const columns = [
         key: 'options',
         render: () => (
             <div>
-                <Button type='primary'>Xem chi tiết</Button> &nbsp;
+
+                <Link to="KhachThue/chiTietKhachThue">
+                    <Button>Xem chi tiết</Button> &nbsp;
+                </Link>
                 <Button danger>Xóa</Button> &nbsp;
-                <Button>Sửa</Button>
+                <Link to="KhachThue/editKhachThue">
+                    <Button type='primary'>Sửa</Button></Link>
             </div>
         )
     },
@@ -67,7 +72,9 @@ class DanhSachKhachThue extends Component {
             <div>
                 <h3 className='text-secondary'>Danh Sách Khách Thuê</h3>
                 <div className='text-right mb-4'>
-                    <button className='btn btn-success mr-2'>Thêm Khách </button>
+                    <Link to="/KhachThue/themKhachThue">
+                        <button className='btn btn-success mr-2'>Thêm Khách </button>
+                    </Link>
                 </div>
 
                 <Table columns={columns} dataSource={this.props.mangKhachHang} />

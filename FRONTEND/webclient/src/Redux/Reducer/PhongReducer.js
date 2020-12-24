@@ -1,4 +1,4 @@
-import { SET_DANHSACH_PHONG, SET_PHONG } from "../type/type";
+import { ADD_PHONG, SET_DANHSACH_PHONG, SET_PHONG } from "../type/type";
 
 
 const stateDefault = {
@@ -6,20 +6,22 @@ const stateDefault = {
     mangPhong: [],
     Phong: {
         values: {
-            dientich: "",
-            giaphong: " ",
-            succhua: " ",
-            tinhtrangphong: " ",
+            // maphong: 0,
+            dientich: '',
+            giaphong: '',
+            succhua: '',
+            tinhtrangphong: '',
             trangthai: false,
-            tenphong: " ",
+            tenphong: '',
         },
         errors: {
-            dientich: " ",
-            giaphong: " ",
-            succhua: " ",
-            tinhtrangphong: " ",
+
+            dientich: '',
+            giaphong: '',
+            succhua: '',
+            tinhtrangphong: '',
             trangthai: false,
-            tenphong: " ",
+            tenphong: '',
         }
     }
 }
@@ -33,7 +35,7 @@ const PhongReducer = (state = stateDefault, action) => {
             newMangPhong = action.data.map(phong => ({
                 ...phong,
                 key: phong.maphong,
-                options: {}
+                options: phong.maphong
             }))
 
             state.mangPhong = [...newMangPhong]
@@ -44,7 +46,12 @@ const PhongReducer = (state = stateDefault, action) => {
             state.Phong = { ...action.Phong }
             return { ...state }
         }
+        case ADD_PHONG: {
+            console.log(action);
+            let mangPhongUpdate = [...state.mangPhong, state.Phong.values];
 
+            return { ...state }
+        }
         default:
             return { ...state }
     }

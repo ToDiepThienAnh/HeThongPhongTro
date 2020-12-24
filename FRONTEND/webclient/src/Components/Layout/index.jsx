@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 
 // Components
-import Login from '../TaiKhoan/FormDangNhap';
+import Login from '../NhanVien/FormDangNhap';
 import Home from '../Home';
 
 export default class Layout extends Component {

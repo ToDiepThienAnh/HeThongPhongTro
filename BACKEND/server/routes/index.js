@@ -54,6 +54,35 @@ router.get('/getAllNhanVien', function (req, res, next) {
 
 
 /* API CHO PHÒNG */
+// lấy thông tin phòng dựa theo id
+router.get('/getPhong/:id', function (req, res, next) {
+  // Website you wish to allow to connect
+  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  const id = parseInt(req.params.id)
+
+  console.log('id', id)
+
+  pool.query('SELECT * FROM phong WHERE maphong = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    res.status(200).json(results.rows)
+  })
+
+});
 // lấy thông tin toàn bộ phòng
 router.get('/getAllPhong', function (req, res, next) {
   // Website you wish to allow to connect
