@@ -1,8 +1,32 @@
-import { SET_DANHSACH_KHACHHANG } from "../type/type";
+import { SET_DANHSACH_KHACHHANG, SET_KHACHHANG } from "../type/type";
 
 
 const stateDefault = {
-    mangKhachHang: []
+    mangKhachHang: [],
+    KhachHang: {
+        values: {
+            hoten: "",
+            noithuongtru: "",
+            noisinh: "",
+            nguyenquan: "",
+            ngaysinh: "",
+            gioitinh: "",
+            maphong: "",
+            sodienthoai: "",
+            cmnd: ""
+        },
+        errors: {
+            hoten: "",
+            noithuongtru: "",
+            noisinh: "",
+            nguyenquan: "",
+            ngaysinh: "",
+            gioitinh: "",
+            maphong: "",
+            sodienthoai: "",
+            cmnd: ""
+        }
+    }
 }
 
 const KhachHangReducer = (state = stateDefault, action) => {
@@ -19,6 +43,10 @@ const KhachHangReducer = (state = stateDefault, action) => {
 
             state.mangKhachHang = [...newMangKhachHang]
 
+            return { ...state }
+        }
+        case SET_KHACHHANG: {
+            state.KhachHang = action.KhachHang
             return { ...state }
         }
         default:

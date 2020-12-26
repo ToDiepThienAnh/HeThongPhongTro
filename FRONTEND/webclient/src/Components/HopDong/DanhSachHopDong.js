@@ -5,6 +5,7 @@ import { Table, Button, Switch } from 'antd';
 import { SET_DANHSACH_HOPDONG } from '../../Redux/type/type';
 import { Link, Redirect, Route } from 'react-router-dom'
 import FormKhachThue from '../KhachThue/FormKhachThue';
+import moment from 'moment'
 
 const columns = [
     {
@@ -16,11 +17,13 @@ const columns = [
         title: 'Ngày Thuê',
         dataIndex: 'ngaythue',
         key: 'ngaythue',
+        render: (ngaythue) => <div>{moment(ngaythue).format("DD/MM/YYYY")}</div>
     },
     {
         title: 'Ngày Hết Hạn',
         dataIndex: 'ngayhethan',
         key: 'ngayhethan',
+        render: (ngayhethan) => <div>{moment(ngayhethan).format("DD/MM/YYYY")}</div>
     },
     {
         title: 'Kỳ thanh toán',

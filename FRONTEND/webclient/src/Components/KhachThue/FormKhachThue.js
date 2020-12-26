@@ -95,82 +95,93 @@ class FormKhachThue extends Component {
                         <div className="col-6">
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Họ và tên *</p></div>
-                                <div className='col-8 pl-0'><input type="text" className="form-control" /></div>
+                                <div className='col-8 pl-0'><input onChange={this.handleChangeInput} name='hoten' value={hoten} type="text" className="form-control" />
+                                    <p className='text-danger'>{this.props.KhachHang.errors.hoten}</p></div>
 
                             </div>
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Giới tính *</p></div>
                                 <div className='col-8 pl-0'>
-                                    {/* <select value={gioitinh} className='form-control' name='gioitinh'> */}
-                                    {/* <option value=''>--- Chọn giới tính---</option> */}
-                                    {/* <option selected="selected" value='Nam'>Nam</option>
+                                    <select value={gioitinh} onChange={this.handleChangeInput} className='form-control' name='gioitinh'>
+                                        <option>--- Chọn giới tính---</option>
+                                        <option value='Nam'>Nam</option>
                                         <option value='Nữ'>Nữ</option>
-                                    </select> */}
-                                    <input
-                                        name='gioitinh' placeholder='Nam hoặc Nữ' type="text" onChange={this.handleChangeInput} value={gioitinh} className="form-control" />
+                                    </select>
                                 </div>
+
                             </div>
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Số điện thoại *</p></div>
-                                <div className='col-8 pl-0'><input type="text" className="form-control" /></div>
+                                <div className='col-8 pl-0'
+                                ><input type="text" typeInput='number' onChange={this.handleChangeInput} name='sodienthoai' value={sodienthoai} className="form-control" />
+                                    <p className='text-danger'>{this.props.KhachHang.errors.sodienthoai}</p></div>
+
                             </div>
 
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Ngày sinh (dd/MM/yyyy) *</p></div>
-                                <div className='col-8 pl-0'><input type="text" className="form-control" /></div>
+                                <div className='col-8 pl-0'><input
+                                    name='ngaysinh' type="date" onChange={this.handleChangeInput} value={ngaysinh} className="form-control" />
+                                    <p className='text-danger'>{this.props.KhachHang.errors.ngaysinh}</p></div>
 
                             </div>
-                            <div className="form-group row px-2">
-                                <div className='col-4 pr-0'><p>Thuê phòng số</p></div>
-                                <div className='col-8 pl-0'><input type="text" className="form-control" /></div>
 
-                            </div>
                         </div>
                         <div className="col-6">
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>CMND/ CCCD *</p></div>
-                                <div className='col-8 pl-0'><input type="text" className="form-control" /></div>
+                                <div className='col-8 pl-0'><input onChange={this.handleChangeInput} name='cmnd' value={cmnd} typeInput='number' type="text" className="form-control" />
+                                    <p className='text-danger'>{this.props.KhachHang.errors.cmnd}</p></div>
 
                             </div>
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Nguyên Quán *</p></div>
-                                <div className='col-8 pl-0'><input type="text" className="form-control" /></div>
+                                <div className='col-8 pl-0'><input onChange={this.handleChangeInput} type="text" name='nguyenquan' value={nguyenquan} className="form-control" />
+                                    <p className='text-danger'>{this.props.KhachHang.errors.nguyenquan}</p></div>
 
                             </div>
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Nơi Sinh *</p></div>
-                                <div className='col-8 pl-0'><input type="text" className="form-control" /></div>
+                                <div className='col-8 pl-0'><input onChange={this.handleChangeInput} type="text" name='noisinh' value={noisinh} className="form-control" />
+                                    <p className='text-danger'>{this.props.KhachHang.errors.noisinh}</p></div>
 
                             </div>
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Thuê phòng số</p></div>
-                                <div className='col-8 pl-0' >
+                                <div className='col-8 pl-0'>
+                                    <input onChange={this.handleChangeInput} type="text" name='maphong' value={maphong} className="form-control" />
                                     {/* <select className='form-control' value={maphong} name='maphong'> */}
                                     {/* render danh sách mã phòng */}
-                                    {/* {this.props.mangPhong.map((phong, index) => {
+                                    {/* {this.props.mangMaPhong[0].map((phong, index) => {
                                             return <option value={phong.maphong} key={index}>
                                                 {phong.maphong}
                                             </option>
-                                        })} */}
-
-                                    {/* </select> */}
-                                    <input onChange={this.handleChangeInput} placeholder='Nhập số phòng' type="number" name='maphong' value={maphong} className="form-control" />
+                                        })}
+                                    </select> */}
                                 </div>
+
                             </div>
+                            {/* <div className="form-group row px-2">
                             <div className='col-4 pr-0'><p>Tiền Phòng</p></div>
                             <div className='col-8 pl-0'><input type="text" className="form-control" /></div>
-                            <div className="form-group row px-2">
-                                <div className='col-4 pr-0'><p>Email </p></div>
-                                <div className='col-8 pl-0'><input type="text" className="form-control" /></div>
 
-                            </div>
+                        </div> */}
+                            {/* <div className="form-group row px-2">
+                            <div className='col-4 pr-0'><p>Email </p></div>
+                            <div className='col-8 pl-0'><input type="text" name='email' value={email} className="form-control" /></div>
+
+                        </div> */}
                         </div>
 
                     </div>
                     <div className="form-group text-secondary row px-2">
                         <div className='col-2 pr-0'><p>Địa chỉ thường trú *</p></div>
-                        <div className='col-10 pl-0'><input type="text" className="form-control" /></div>
+                        <div className='col-10 pl-0'><input onChange={this.handleChangeInput} name='noithuongtru' value={noithuongtru} type="text" className="form-control" />
+                            <p className='text-danger'>{this.props.KhachHang.errors.noithuongtru}</p></div>
 
+                    </div>
+                    <div className='text-center'>
+                        <button onClick={this.handleSubmit} className='btn btn-success px-3'>Lưu</button>
                     </div>
                 </form>
             </div>

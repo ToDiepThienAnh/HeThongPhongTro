@@ -3,49 +3,11 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { connect } from 'react-redux'
 import { Table, Button } from 'antd';
-import { SET_DANHSACH_PHONG } from '../../Redux/type/type';
+import { DELELTE_PHONG, SET_DANHSACH_PHONG } from '../../Redux/type/type';
 import { Link } from 'react-router-dom';
 
 
-const columns = [
-    {
-        title: 'Số phòng',
-        dataIndex: 'maphong',
-        key: 'maphong',
-    },
-    {
-        title: 'Diện tích',
-        dataIndex: 'dientich',
-        key: 'dientich',
-    },
-    {
-        title: 'Sức chứa',
-        dataIndex: 'succhua',
-        key: 'succhua',
-    },
-    {
-        title: 'Giá phòng',
-        dataIndex: 'giaphong',
-        key: 'giaphong',
-        render: (giaPhong) => <div>{giaPhong} VNĐ</div>
-    },
-    {
-        title: '',
-        dataIndex: 'options',
-        key: 'options',
-        render: (maPhong) => (
-            <div>
-                <Link to={`/Phong/chiTietPhong/${maPhong}`}>
-                    <Button type='primary'>Xem chi tiết</Button>
-                </Link> &nbsp;
-                <Button danger>Xóa</Button> &nbsp;
-                <Link to={`/Phong/editPhong/${maPhong}`}>
-                    <Button>Sửa</Button></Link>
-            </div>
-        )
-    },
 
-];
 
 // const data = [];
 // for (let i = 0; i < 46; i++) {
@@ -64,6 +26,54 @@ class DanhSachPhong extends Component {
     // // state = {
     // //     mangPhong: null
     // // }
+
+    columns = [
+        {
+            title: 'Số phòng',
+            dataIndex: 'maphong',
+            key: 'maphong',
+        },
+        {
+            title: 'Diện tích',
+            dataIndex: 'dientich',
+            key: 'dientich',
+        },
+        {
+            title: 'Sức chứa',
+            dataIndex: 'succhua',
+            key: 'succhua',
+        },
+        {
+            title: 'Giá phòng',
+            dataIndex: 'giaphong',
+            key: 'giaphong',
+            render: (giaPhong) => <div>{giaPhong} VNĐ</div>
+        },
+        {
+            title: '',
+            dataIndex: 'options',
+            key: 'options',
+            render: (maPhong) => (
+                <div>
+                    <Link to={`/Phong/chiTietPhong/${maPhong}`}>
+                        <Button type='primary'>Xem chi tiết</Button>
+                    </Link> &nbsp;
+                    <Button onClick={() => { this.handleDelete(maPhong) }} danger>Xóa</Button> &nbsp;
+                    <Link to={`/Phong/editPhong/${maPhong}`}>
+                        <Button>Sửa</Button></Link>
+                </div>
+            )
+        },
+
+    ];
+
+    handleDelete = (maPhong) => {
+        console.log(maPhong);
+        this.props.dispatch({
+            type: DELELTE_PHONG,
+            maPhong
+        })
+    }
 
     layDanhSachPhong = () => {
         axios.get('http://localhost:4000/getAllPhong').then(res => this.props.dispatch({
@@ -122,7 +132,7 @@ class DanhSachPhong extends Component {
                     </Link>
                 </div>
 
-                <Table columns={columns} dataSource={this.props.mangPhong} />
+                <Table columns={this.columns} dataSource={this.props.mangPhong} />
             </div>
         )
     }

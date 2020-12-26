@@ -1,4 +1,4 @@
-import { ADD_PHONG, SET_DANHSACH_PHONG, SET_PHONG } from "../type/type";
+import { ADD_PHONG, DELELTE_PHONG, SET_DANHSACH_PHONG, SET_PHONG } from "../type/type";
 
 
 const stateDefault = {
@@ -51,6 +51,15 @@ const PhongReducer = (state = stateDefault, action) => {
             let mangPhongUpdate = [...state.mangPhong, state.Phong.values];
 
             return { ...state }
+        }
+        case DELELTE_PHONG: {
+            let mangPhongUpdate = [...state.mangPhong]
+            mangPhongUpdate = mangPhongUpdate.filter(phong => phong.maphong !== action.maPhong)
+            console.log(mangPhongUpdate);
+            return {
+                ...state,
+                mangPhong: mangPhongUpdate
+            }
         }
         default:
             return { ...state }
