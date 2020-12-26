@@ -31,6 +31,7 @@ class ChiTietPhong extends Component {
 
     render() {
         console.log('phong', this.state.phong)
+        const { dientich, giaphong, maphong, succhua, tinhtrangphong, tenphong, trangthai } = this.state.phong;
         return (
             <div>
                 <h3 className='text-secondary'>Chi Tiết Phòng</h3>
@@ -46,21 +47,21 @@ class ChiTietPhong extends Component {
                         <div className="col-6">
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Mã Phòng *</p></div>
-                                <div className='col-8 pl-0'><input disabled type='text' name='maphong' className="form-control" />
+                                <div className='col-8 pl-0'><input disabled value={maphong} type='text' name='maphong' className="form-control" />
                                     <p className='text-danger'></p>
                                 </div>
 
                             </div>
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Tên Phòng *</p></div>
-                                <div className='col-8 pl-0'><input disabled type='text' name='tenphong' className="form-control" />
+                                <div className='col-8 pl-0'><input value={tenphong} disabled type='text' name='tenphong' className="form-control" />
                                     <p className='text-danger'></p>
                                 </div>
 
                             </div>
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Diện tích Phòng *</p></div>
-                                <div className='col-8 pl-0'><input disabled typeInput='number' name='dientich' type="text" className="form-control" />
+                                <div className='col-8 pl-0'><input value={dientich} disabled typeInput='number' name='dientich' type="text" className="form-control" />
                                     <p className='text-danger'></p>
                                 </div>
 
@@ -73,7 +74,7 @@ class ChiTietPhong extends Component {
                         <div className="col-6">
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Tình Trạng Phòng</p></div>
-                                <select disabled type='radio' name='tinhtrangphong' className='form-control col-6'>
+                                <select disabled value={tinhtrangphong} type='radio' name='tinhtrangphong' className='form-control col-6'>
                                     <option>---Chọn tình trạng phòng---</option>
                                     <option value={true}>Còn Trống</option>
                                     <option value={false}>Đã Thuê</option>
@@ -82,13 +83,13 @@ class ChiTietPhong extends Component {
                             </div>
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Giá Phòng *</p></div>
-                                <div className='col-7 pl-0'><input disabled typeInput='number' name='giaphong' type="text" className="form-control" />
+                                <div className='col-7 pl-0'><input value={giaphong} disabled typeInput='number' name='giaphong' type="text" className="form-control" />
                                     <p className='text-danger'></p></div>
 
                             </div>
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Sức chứa tối đa *</p></div>
-                                <div className='col-8 pl-0'><input disabled typeInput='number' name='succhua' type="text" className="form-control" />
+                                <div className='col-8 pl-0'><input value={succhua} disabled typeInput='number' name='succhua' type="text" className="form-control" />
                                     <p className='text-danger'></p></div>
 
                             </div>

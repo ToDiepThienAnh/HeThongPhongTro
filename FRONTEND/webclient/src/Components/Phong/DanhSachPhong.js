@@ -39,7 +39,7 @@ const columns = [
                     <Button type='primary'>Xem chi tiết</Button>
                 </Link> &nbsp;
                 <Button danger>Xóa</Button> &nbsp;
-                <Link to="/Phong/editPhong">
+                <Link to={`/Phong/editPhong/${maPhong}`}>
                     <Button>Sửa</Button></Link>
             </div>
         )

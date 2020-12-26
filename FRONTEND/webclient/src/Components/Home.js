@@ -66,7 +66,7 @@ export default class Home extends Component {
                             <Route path='/HoaDon/chiTietHoaDon' exact component={ChiTietHoaDon} />
                             {/* Sửa thông tin */}
                             <Route path='/HopDong/editHopDong' exact component={ChinhSuaHopDong} />
-                            <Route path='/Phong/editPhong' exact component={ChinhSuaPhong} />
+                            <Route path='/Phong/editPhong/:id' exact component={ChinhSuaPhong} />
                             <Route path='/KhachThue/editKhachThue' exact component={ChinhSuaKhachThue} />
                             <Route path='/NhanVien/editNhanVien' exact component={ChinhSuaNhanVien} />
                             <Redirect to='/Phong' />

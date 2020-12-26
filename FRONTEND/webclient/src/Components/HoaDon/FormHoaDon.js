@@ -91,7 +91,9 @@ class FormHoaDon extends Component {
                 <div className='d-flex justify-content-between'>
                     <h1 className=''>Thêm Hóa Đơn</h1>
                     <div className=''>
-                        <button className='btn btn-warning mr-2 text-white'><i class="fa fa-reply"></i><span className='ml-2'>Quay về</span></button>
+                        <Link to='/HoaDon'>
+                            <button className='btn btn-warning mr-2 text-white'><i class="fa fa-reply"></i><span className='ml-2'>Quay về</span></button>
+                        </Link>
                         <button className='btn btn-success'><i class="fa fa-check"></i><span className='ml-2'>Lưu</span></button>
                     </div>
                 </div>

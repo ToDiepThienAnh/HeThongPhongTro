@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux'
 import { Table, Button } from 'antd';
 import { SET_DANHSACH_HOADON } from '../../Redux/type/type';
+import { Link } from 'react-router-dom';
 
 
 const columns = [
@@ -62,7 +63,9 @@ class DanhSachHoaDon extends Component {
             <div className='container bg-light'>
                 <h1>Danh Sách Hóa Đơn</h1>
                 <div>
-                    <button className='btn btn-success float-right'>Thêm</button>
+                    <Link to={'/HoaDon/themHoaDon'}>
+                        <button className='btn btn-success float-right'>Thêm</button>
+                    </Link>
                 </div>
                 {/* <table className='table'>
                     <thead>
