@@ -5,12 +5,13 @@ import KhachHangReducer from './Reducer/KhachHangReducer'
 import HopDongReducer from './Reducer/HopDongReducer'
 import NhanVienReducer from './Reducer/NhanVienReducer'
 import HoaDonReducer from './Reducer/HoaDonReducer'
+import TaiSanReducer from './Reducer/TaiSanReducer'
 
 
 
 const rootReducer = combineReducers({
     // khai báo reducer tại đây
-    PhongReducer, DichVuReducer, KhachHangReducer, HopDongReducer, NhanVienReducer, HoaDonReducer
+    PhongReducer, DichVuReducer, KhachHangReducer, HopDongReducer, NhanVienReducer, HoaDonReducer, TaiSanReducer
 })
 
 const store = createStore(rootReducer);

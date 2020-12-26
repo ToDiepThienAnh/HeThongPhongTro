@@ -83,6 +83,38 @@ router.get('/getPhong/:id', function (req, res, next) {
   })
 
 });
+
+// lấy thông tin tất cả mã phòng
+router.get('/getMaPhong', function (req, res, next) {
+  // Website you wish to allow to connect
+  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+
+
+
+
+  pool
+    .query('SELECT maphong FROM phong')
+    .then(respond => res.send(respond.rows))
+    .catch(error =>
+      setImmediate(() => {
+        throw error
+      })
+    )
+
+});
 // lấy thông tin toàn bộ phòng
 router.get('/getAllPhong', function (req, res, next) {
   // Website you wish to allow to connect
@@ -195,7 +227,33 @@ router.get('/getAllDichVu', function (req, res, next) {
     )
 
 });
+// Xóa dịch vụ
+router.delete('/xoaDichVu/:id', function (req, res, next) {
+  // Website you wish to allow to connect
+  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  const id = parseInt(req.params.id)
+  pool.query('DELETE FROM dichvu WHERE id = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).send(`User deleted with ID: ${id}`)
+  })
+
+
+});
 // THêm dịch vụ mới
 router.get('/themDichVu', function (req, res, next) {
   // Website you wish to allow to connect
@@ -373,8 +431,8 @@ router.post('/themHopDong', function (req, res, next) {
 
   var ngaythue = req.body.ngaythue,
     ngayhethan = req.body.ngayhethan,
-    thoihan = req.body.thoihan,
-    kythanhtoan = req.body.kythanhtoan,
+    thoihan = parseInt(req.body.thoihan),
+    kythanhtoan = parseInt(req.body.kythanhtoan),
     maphong = req.body.maphong,
     makhachhang = req.body.makhachhang
 
@@ -419,4 +477,146 @@ router.get('/getAllHopDongThue', function (req, res, next) {
 });
 
 
+
+
+
+// lấy thông tin khách hàng với mã phòng
+// router.get('/getKhachHang', function (req, res, next) {
+//   // Website you wish to allow to connect
+//   // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+
+//   // Request methods you wish to allow
+//   res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+//   // Request headers you wish to allow
+//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+//   // Set to true if you need the website to include cookies in the requests sent
+//   // to the API (e.g. in case you use sessions)
+//   res.setHeader('Access-Control-Allow-Credentials', true);
+
+
+
+//   pool
+//     .query('select makhachhang, hoten from khachhang')
+//     .then(respond => res.send(respond.rows))
+//     .catch(error =>
+//       setImmediate(() => {
+//         throw error
+//       })
+//     )
+
+// });
+
+// API cho Tài Sản
+router.get('/themTaiSan', function (req, res, next) {
+  // Website you wish to allow to connect
+  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+});
+router.post('/themTaiSan', function (req, res, next) {
+  // Website you wish to allow to connect
+  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  var ten = req.body.ten,
+    serial = req.body.serial,
+
+    maphong = req.body.maphong,
+    dongia = req.body.dongia
+
+
+  pool
+    .query('insert into taisan (ten, serial, maphong, dongia) values ($1,$2,$3,$4)', [ten, serial, maphong, dongia], (error, response) => {
+      if (error) {
+        console.log(error);
+      } else {
+        res.send('Đã insert dữ liệu thành công');
+      }
+    })
+});
+// lấy thông tin toàn bộ hợp đồng
+router.get('/getAllTaiSan', function (req, res, next) {
+  // Website you wish to allow to connect
+  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+
+
+  pool
+    .query('select * from taisan')
+    .then(respond => res.send(respond.rows))
+    .catch(error =>
+      setImmediate(() => {
+        throw error
+      })
+    )
+
+});
+
+
+router.get('/deleteTaiSan/:id', function (req, res, next) {
+  // Website you wish to allow to connect
+  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  const id = parseInt(req.params.id)
+
+  pool
+    .query('delete from taisan where id = $1', [id], (error, response) => {
+      if (error) {
+        console.log(error);
+      } else {
+        res.send('Đã Xóa dữ liệu thành công');
+      }
+    })
+
+});
 module.exports = router;

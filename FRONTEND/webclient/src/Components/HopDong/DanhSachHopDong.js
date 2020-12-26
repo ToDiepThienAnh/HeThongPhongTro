@@ -30,8 +30,8 @@ const columns = [
     },
     {
         title: 'Khách Hàng',
-        dataIndex: 'makhachhang',
-        key: 'khachhang',
+        dataIndex: 'hoten',
+        key: 'hoten',
 
     },
     {

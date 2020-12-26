@@ -6,6 +6,7 @@ import axios from 'axios'
 
 
 
+
 class ServicesList extends Component {
 
     layDanhSachDichVu = () => {
@@ -19,7 +20,12 @@ class ServicesList extends Component {
         this.layDanhSachDichVu()
     }
 
-
+    handleDelete = async (madichvu) => {
+        const xoaDichVu = await axios({
+            method: "DELETE",
+            url: `http://localhost:4000/xoaDichVu/${madichvu}`
+        })
+    }
     render() {
         console.log(this.props.mangDichVu, "Mảng dịch vụ");
         return (
@@ -54,7 +60,7 @@ class ServicesList extends Component {
 
                                 <td className='w-25 text-center'>
                                     <button className='btn btn-primary mr-2'>Chỉnh Sửa</button>
-                                    <button className='btn btn-danger'>Xóa</button>
+                                    <button onClick={() => this.handleDelete(dichvu.madichvu)} className='btn btn-danger'>Xóa</button>
                                 </td>
                                 <td>{dichvu.tendichvu}</td>
                                 <td>{dichvu.loaidichvu}</td>

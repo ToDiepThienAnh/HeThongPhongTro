@@ -57,6 +57,7 @@ export default class Home extends Component {
                             <Route path='/DichVu/themDichVu' exact component={FormDichVu} />
                             <Route path='/TaiSan/themTaiSan' exact component={ThemTaiSan} />
                             <Route path='/NhanVien/themNhanVien' exact component={ThemNhanVien} />
+                            <Route path='/TaiSan/themTaiSan' exact component={ThemTaiSan} />
                             <Route path='/ChiTiet/:id' exact component={FormPhong} />
                             {/* ChiTiet  */}
                             <Route path='/HopDong/chiTietHopDong' exact component={ChiTietHopDong} />

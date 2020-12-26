@@ -14,7 +14,7 @@ const KhachHangReducer = (state = stateDefault, action) => {
             newMangKhachHang = action.data.map(kh => ({
                 ...kh,
                 key: kh.makhachhang,
-                options: {}
+                options: kh.makhachhang
             }))
 
             state.mangKhachHang = [...newMangKhachHang]
