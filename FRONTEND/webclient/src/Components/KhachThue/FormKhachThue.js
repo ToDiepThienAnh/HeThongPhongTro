@@ -23,12 +23,28 @@ class FormKhachThue extends Component {
     //         data: getMaPhong.data
     //     })
     // }
+    state = {
+        mangPhong: []
+    }
 
-    // componentDidMount() {
-    //     this.getMangMaPhong()
-    // }
+
+    layDanhSachPhong = async () => {
+        const layDanhSachPhong = await Axios({
+            method: 'GET',
+            url: 'http://localhost:4000/getAllPhong'
+        })
+
+        if (layDanhSachPhong) {
+            this.setState({
+                mangPhong: layDanhSachPhong.data
+            })
+        }
+    }
+
     componentDidMount() {
         console.log(this.props.match.params.id);
+
+        this.layDanhSachPhong()
 
         const newValues = { ...this.props.KhachHang.values };
 
@@ -98,15 +114,29 @@ class FormKhachThue extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
+
         let { hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, sodienthoai, cmnd, maphong } = this.props.KhachHang.values
+
+        if (cmnd.trim().length !== 9 && cmnd.trim().length !== 12) {
+            alert('CMND phải có 9 số và CCCD phải có 12 số')
+            return
+
+        }
+        if (sodienthoai.trim().length > 11 || sodienthoai.trim().length < 10) {
+            alert('Số điện thoại phải có 10 tới 11 số')
+            return
+
+        }
+
+
 
         this.themKhachThue(hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, sodienthoai, cmnd, maphong)
     }
 
     render() {
-
-        console.log('router', this.props);
-        console.log("Mảng Khach Hang ", this.props.KhachHang.values);
+        console.log("Danh Sách Phòng ", this.state);
+        // console.log('router', this.props);
+        // console.log("Mảng Khach Hang ", this.props.KhachHang.values);
         let { hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, maphong, sodienthoai, cmnd } = this.props.KhachHang.values;
         return (
             <div>
@@ -175,17 +205,17 @@ class FormKhachThue extends Component {
 
                             </div>
                             <div className="form-group row px-2">
-                                <div className='col-4 pr-0'><p>Thuê phòng số</p></div>
+                                <div className='col-4 pr-0'><p>Thuê phòng </p></div>
                                 <div className='col-8 pl-0'>
-                                    <input onChange={this.handleChangeInput} type="text" name='maphong' value={maphong} className="form-control" />
-                                    {/* <select className='form-control' value={maphong} name='maphong'> */}
-                                    {/* render danh sách mã phòng */}
-                                    {/* {this.props.mangMaPhong[0].map((phong, index) => {
-                                            return <option value={phong.maphong} key={index}>
-                                                {phong.maphong}
+                                    {/* <input onChange={this.handleChangeInput} type="text" name='maphong' value={maphong} className="form-control" /> */}
+                                    <select onChange={this.handleChangeInput} name='maphong' value={maphong} className="form-control">
+                                        <option>-- Vui lòng chọn phòng thuê ---</option>
+                                        {this.state.mangPhong.map((phong, index) => {
+                                            return <option key={index} value={phong.maphong}>
+                                                {phong.tenphong}
                                             </option>
                                         })}
-                                    </select> */}
+                                    </select>
                                 </div>
 
                             </div>

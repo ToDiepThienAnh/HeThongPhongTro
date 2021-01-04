@@ -28,6 +28,7 @@ import FormHoaDon from './HoaDon/FormHoaDon'
 import ThemNhanVien from './NhanVien/ThemNhanVien'
 import ChinhSuaNhanVien from './NhanVien/ChinhSuaNhanVien'
 import DanhSachHopDongDaThue from './HopDong/DanhSachHopDongDaThue'
+import DanhSachHoaDonDaThanhToan from './HoaDon/DanhSachHoaDonDaThanhToan'
 
 export default class Home extends Component {
     render() {
@@ -73,6 +74,8 @@ export default class Home extends Component {
 
                             {/* Danh Sách Hợp Đồng Đã Thuê */}
                             <Route path='/HopDong/HopDongDaThue' exact component={DanhSachHopDongDaThue} />
+                            {/* Danh sách hóa đơn đã thanh toán */}
+                            <Route path='/HoaDon/HoaDonDaThanhToan' exact component={DanhSachHoaDonDaThanhToan} />
                             <Redirect to='/Phong' />
 
                         </Switch>

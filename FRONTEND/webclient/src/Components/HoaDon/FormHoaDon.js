@@ -8,6 +8,22 @@ import numeral from 'numeral'
 import { min } from 'moment'
 class FormHoaDon extends Component {
 
+    state = {
+        mangPhong: []
+    }
+
+    layDanhSachPhong = async () => {
+        const layDanhSachPhong = await Axios({
+            method: 'GET',
+            url: 'http://localhost:4000/getAllPhong'
+        })
+
+        if (layDanhSachPhong) {
+            this.setState({
+                mangPhong: layDanhSachPhong.data
+            })
+        }
+    }
 
     layDanhSachDichVu = () => {
         Axios.get('http://localhost:4000/getALlDichVu').then(res => this.props.dispatch({
@@ -18,6 +34,7 @@ class FormHoaDon extends Component {
 
     componentDidMount() {
         this.layDanhSachDichVu()
+        this.layDanhSachPhong()
     }
 
     onChangeChiso = (value, index) => {
@@ -151,7 +168,15 @@ class FormHoaDon extends Component {
                                 <p>Phòng *</p>
                             </div>
                             <div className='col-8 pl-0'>
-                                <input onChange={this.handleChangeInput} className='form-control' name="maphong" value={maphong} typeInput='number' type="text"></input>
+                                {/* <input onChange={this.handleChangeInput} className='form-control' name="maphong" value={maphong} typeInput='number' type="text"></input> */}
+                                <select onChange={this.handleChangeInput} className='form-control' name="maphong" value={maphong} >
+                                    <option>-- Vui lòng chọn tên phòng---</option>
+                                    {this.state.mangPhong.map((phong, index) => {
+                                        return <option key={index} value={phong.maphong}>
+                                            {phong.tenphong}
+                                        </option>
+                                    })}
+                                </select>
                                 <p className='text-danger'>{this.props.HoaDon.errors.maphong}</p>
                             </div>
                         </div>
@@ -173,7 +198,21 @@ class FormHoaDon extends Component {
                                 <p>Tháng thanh toán *</p>
                             </div>
                             <div className='col-8 pl-0'>
-                                <input name="thangthanhtoan" value={thangthanhtoan} onChange={this.handleChangeInput} min='1' max='12' className='form-control' type="number"></input>
+                                {/* <input name="thangthanhtoan" value={thangthanhtoan} onChange={this.handleChangeInput} placeholder="Chọn 1 tới 12" min='1' max='12' className='form-control' type="number"></input> */}
+                                <select className='form-control' value={thangthanhtoan} onChange={this.handleChangeInput} name='thangthanhtoan'>
+                                    <option value='1'>Tháng 1</option>
+                                    <option value='2'>Tháng 2</option>
+                                    <option value='3'>Tháng 3</option>
+                                    <option value='4'>Tháng 4</option>
+                                    <option value='5'>Tháng 5</option>
+                                    <option value='6'>Tháng 6</option>
+                                    <option value='7'>Tháng 7</option>
+                                    <option value='8'>Tháng 8</option>
+                                    <option value='9'>Tháng 9</option>
+                                    <option value='10'>Tháng 10</option>
+                                    <option value='11'>Tháng 11</option>
+                                    <option value='12'>Tháng 12</option>
+                                </select>
                                 <p className='text-danger'>{this.props.HoaDon.errors.thangthanhtoan}</p>
                             </div>
                         </div>
@@ -192,10 +231,10 @@ class FormHoaDon extends Component {
                     <div className='col-6'>
                         <div className='form-group row px-2'>
                             <div className='col-4'>
-                                <p>Năm thanh toán *</p>
+                                <p>Giá Phòng </p>
                             </div>
                             <div className='col-8 pl-0'>
-                                <input name="namthanhtoan" value={namthanhtoan} onChange={this.handleChangeInput} className='form-control' min='1' type="number"></input>
+                                <input name="giaphong" disabled className='form-control' ></input>
                                 <p className='text-danger'>{this.props.HoaDon.errors.namthanhtoan}</p>
                             </div>
                         </div>
@@ -226,10 +265,15 @@ class FormHoaDon extends Component {
                     <div className='col-6'>
                         <div className='form-group row px-2'>
                             <div className='col-4'>
-                                <p>Trạng thái phí *</p>
+                                <p>Tình Trạng phí *</p>
                             </div>
                             <div className='col-8 pl-0'>
-                                <input onChange={this.handleChangeInput} className='form-control' type="text" name="tinhtrangphi" value={tinhtrangphi}></input>
+                                {/* <input onChange={this.handleChangeInput} className='form-control' type="text" name="tinhtrangphi" value={tinhtrangphi}></input> */}
+                                <select onChange={this.handleChangeInput} className='form-control' name="tinhtrangphi" value={tinhtrangphi}>
+                                    <option >--- Chọn tình trạng hóa đơn ---- </option>
+                                    <option value='true'>Đã Thanh toán</option>
+                                    <option value='false'>Chưa thanh toán</option>
+                                </select>
                                 <p className='text-danger'>{this.props.HoaDon.errors.tinhtrangphi}</p>
 
                             </div>

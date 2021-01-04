@@ -61,11 +61,14 @@ class DanhSachHoaDon extends Component {
     render() {
         console.log("mang hoa don", this.props.mangHoaDon);
         return (
-            <div className='container bg-light'>
-                <h1>Danh Sách Hóa Đơn</h1>
-                <div>
+            <div className='bg-light'>
+                <h1>Danh Sách Hóa Đơn Chưa thanh toán</h1>
+                <div className='mb-3 d-flex justify-content-between'>
+                    <Link to='/HoaDon/HoaDonDaThanhToan'>
+                        <button className='btn btn-primary '>Danh sách hóa đơn đã thanh toán</button>
+                    </Link>
                     <Link to={'/HoaDon/themHoaDon'}>
-                        <button className='btn btn-success float-right'>Thêm</button>
+                        <button className='btn btn-success '>Thêm</button>
                     </Link>
                 </div>
                 <table className='table'>
@@ -90,7 +93,13 @@ class DanhSachHoaDon extends Component {
                                 <td>{hoadon.namthanhtoan}</td>
                                 <td>{hoadon.phiphatsinh}</td>
                                 <td>{hoadon.thanhtien}</td>
-                                <td>{hoadon.tinhtrangphi}</td>
+                                <td>{hoadon.tinhtrangphi === 'true' ? 'Đã thanh toán' : 'Chưa thanh toán'}</td>
+                                <td>
+
+                                    <button className='btn btn-info'>
+                                        <i className="fa fa-check"></i>
+                                    </button>
+                                </td>
                             </tr>
                         })}
                     </tbody>

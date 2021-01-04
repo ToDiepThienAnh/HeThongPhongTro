@@ -4,6 +4,7 @@ import { SET_DANHSACH_HOADON, SET_HOADON } from "../type/type";
 const stateDefault = {
     // mangPhong: [{"maphong":5,"dientich":15,"loaiphong":1,"giaphong":"$1,400,000.00","succhua":5,"tinhtrangphong":false,"trangthai":true}],
     mangHoaDon: [],
+    mangHoaDonDaThanhToan: [],
     HoaDon: {
         values: {
             ngaylap: "",
@@ -41,6 +42,19 @@ const HoaDonReducer = (state = stateDefault, action) => {
             }))
 
             state.mangHoaDon = [...newMangHoaDon]
+
+            return { ...state }
+        }
+        case 'SET_DANHSACH_HOADON_THANHTOAN': {
+            let newMangHoaDon = [];
+
+            newMangHoaDon = action.data.map(hoadon => ({
+                ...hoadon,
+                key: hoadon.mahoadon,
+                options: {}
+            }))
+
+            state.mangHoaDonDaThanhToan = [...newMangHoaDon]
 
             return { ...state }
         }
