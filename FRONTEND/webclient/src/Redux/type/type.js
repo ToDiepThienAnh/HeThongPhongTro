@@ -16,6 +16,7 @@ export const SET_NHANVIEN = "SET_NHANVIEN"
 export const SET_MAPHONG_PHONG = "SET_KHACHHANG_PHONG";
 export const SET_MA_KHACHHANG = "SET_MA_KHACHHANG";
 export const SET_TAISAN = "SET_TAISAN"
+export const SET_HOADON = "SET_HOADON"
 
 // THÊM DỮ LIỆU
 export const ADD_PHONG = "ADD_PHONG"

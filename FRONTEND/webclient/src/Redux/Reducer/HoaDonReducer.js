@@ -1,9 +1,31 @@
-import { SET_DANHSACH_HOADON } from "../type/type";
+import { SET_DANHSACH_HOADON, SET_HOADON } from "../type/type";
 
 
 const stateDefault = {
     // mangPhong: [{"maphong":5,"dientich":15,"loaiphong":1,"giaphong":"$1,400,000.00","succhua":5,"tinhtrangphong":false,"trangthai":true}],
-    mangHoaDon: []
+    mangHoaDon: [],
+    HoaDon: {
+        values: {
+            ngaylap: "",
+            thangthanhtoan: "",
+            phiphatsinh: "",
+            tenphieuthu: "",
+            thanhtien: "",
+            tinhtrangphi: "",
+            namthanhtoan: "",
+            maphong: ""
+        },
+        errors: {
+            ngaylap: "",
+            thangthanhtoan: "",
+            phiphatsinh: "",
+            tenphieuthu: "",
+            thanhtien: "",
+            tinhtrangphi: "",
+            namthanhtoan: "",
+            maphong: ""
+        }
+    }
 }
 
 const HoaDonReducer = (state = stateDefault, action) => {
@@ -20,6 +42,10 @@ const HoaDonReducer = (state = stateDefault, action) => {
 
             state.mangHoaDon = [...newMangHoaDon]
 
+            return { ...state }
+        }
+        case SET_HOADON: {
+            state.HoaDon = action.HoaDon
             return { ...state }
         }
         default:

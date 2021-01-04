@@ -114,7 +114,15 @@ class FormPhong extends Component {
                             </div>
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Diện tích Phòng *</p></div>
-                                <div className='col-8 pl-0'><input placeholder="Diện tích phòng phải trên 15 mét vuông" onChange={this.handleChangeInput} name='dientich' value={dientich} type="number" min="15" className="form-control" />
+                                <div className='col-8 pl-0'>
+                                    {/* <input placeholder="Diện tích phòng phải trên 15 mét vuông" onChange={this.handleChangeInput} name='dientich' value={dientich} type="number" min="15" className="form-control" /> */}
+                                    <select className="form-control" value={dientich} onChange={this.handleChangeInput} name='dientich' >
+                                        <option >---- Vui lòng chọn diện tích phòng</option>
+                                        <option value='15'>15 mét vuông</option>
+                                        <option value='18'>18 mét vuông</option>
+                                        <option value='20'>20 mét vuông</option>
+                                        <option value='22'>22 mét vuông</option>
+                                    </select>
                                     <p className='text-danger'>{this.props.Phong.errors.dientich}</p>
                                 </div>
 
@@ -135,13 +143,29 @@ class FormPhong extends Component {
                             </div>
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Giá Phòng *</p></div>
-                                <div className='col-7 pl-0'><input placeholder="Trên 1000000 và dưới 2000000" onChange={this.handleChangeInput} min="1000000" max="2000000" name='giaphong' value={giaphong} type="number" className="form-control" />
+                                <div className='col-7 pl-0'>
+                                    {/* <input placeholder="Trên 1000000 và dưới 2000000" onChange={this.handleChangeInput} min="1000000" max="2000000" name='giaphong' value={giaphong} type="number" className="form-control" /> */}
+                                    <select className="form-control" value={giaphong} onChange={this.handleChangeInput} name='giaphong' >
+                                        <option >---- Vui lòng chọn giá phòng</option>
+                                        <option value='1200000'>1200000 VNĐ</option>
+                                        <option value='1500000'>1500000 VNĐ</option>
+                                        <option value='1800000'>1800000 VNĐ</option>
+                                        <option value='2000000'>2000000 VNĐ</option>
+                                    </select>
                                     <p className='text-danger'>{this.props.Phong.errors.giaphong}</p></div>
 
                             </div>
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Sức chứa tối đa *</p></div>
-                                <div className='col-8 pl-0'><input typeInput='number' onChange={this.handleChangeInput} name='succhua' value={succhua} type="number" min='1' placeholder="Sức chứa trên 0" className="form-control" />
+                                <div className='col-8 pl-0'>
+                                    {/* <input typeInput='number' onChange={this.handleChangeInput} name='succhua' value={succhua} type="number" min='1' placeholder="Sức chứa trên 0" className="form-control" /> */}
+                                    <select className="form-control" value={succhua} onChange={this.handleChangeInput} name='succhua' >
+                                        <option >---- Vui lòng chọn diện Sức chứa của phòng</option>
+                                        <option value='3'>tối đa 3 người</option>
+                                        <option value='4'>tối đa 4 người</option>
+                                        <option value='5'>tối đa 5 người</option>
+                                        <option value='6'>tối đa 6 người</option>
+                                    </select>
                                     <p className='text-danger'>{this.props.Phong.errors.succhua}</p></div>
 
                             </div>

@@ -27,6 +27,7 @@ import ThemTaiSan from './TaiSan/ThemTaiSan'
 import FormHoaDon from './HoaDon/FormHoaDon'
 import ThemNhanVien from './NhanVien/ThemNhanVien'
 import ChinhSuaNhanVien from './NhanVien/ChinhSuaNhanVien'
+import DanhSachHopDongDaThue from './HopDong/DanhSachHopDongDaThue'
 
 export default class Home extends Component {
     render() {
@@ -51,7 +52,7 @@ export default class Home extends Component {
                             {/* Form Nhập thông tin */}
                             <Route path='/HopDong/themHopDong' exact component={FormHopDong} />
                             <Route path='/Phong/themPhong' exact component={FormPhong} />
-                            <Route path='/KhachThue/themKhachThue' exact component={FormKhachThue} />
+                            <Route path='/KhachThue/themKhachThue/:id?' exact component={FormKhachThue} />
                             <Route path='/NhanVien/DangKy' exact component={FormDangKy} />
                             <Route path='/HoaDon/themHoaDon' exact component={FormHoaDon} />
                             <Route path='/DichVu/themDichVu' exact component={FormDichVu} />
@@ -69,7 +70,11 @@ export default class Home extends Component {
                             <Route path='/Phong/editPhong/:id' exact component={ChinhSuaPhong} />
                             <Route path='/KhachThue/editKhachThue' exact component={ChinhSuaKhachThue} />
                             <Route path='/NhanVien/editNhanVien' exact component={ChinhSuaNhanVien} />
+
+                            {/* Danh Sách Hợp Đồng Đã Thuê */}
+                            <Route path='/HopDong/HopDongDaThue' exact component={DanhSachHopDongDaThue} />
                             <Redirect to='/Phong' />
+
                         </Switch>
                         {/* <ServicesList></ServicesList> */}
                         {/* <DanhSachPhong></DanhSachPhong> */}

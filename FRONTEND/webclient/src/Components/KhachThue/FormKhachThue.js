@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { SET_DANHSACH_PHONG, SET_KHACHHANG } from '../../Redux/type/type'
 import Axios from 'axios'
 import { connect } from 'react-redux'
-
+import { isEqual } from 'lodash'
 class FormKhachThue extends Component {
 
     // getMangMaPhong = async () => {
@@ -27,10 +27,31 @@ class FormKhachThue extends Component {
     // componentDidMount() {
     //     this.getMangMaPhong()
     // }
+    componentDidMount() {
+        console.log(this.props.match.params.id);
+
+        const newValues = { ...this.props.KhachHang.values };
+
+        newValues.maphong = this.props.match.params.id
+        this.props.dispatch({
+            type: SET_KHACHHANG,
+            KhachHang: {
+                ...this.props.KhachHang,
+                values: newValues
+            }
+        })
+    }
+
+    componentDidUpdate(preProps, preState) {
+        console.log('dfajoisd');
+        if (!isEqual(preProps.KhachHang.values, this.props.KhachHang.values)) {
+
+        }
+    }
 
 
 
-    themKhachThue = async (hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, sodienthoai, cmnd, trangthai, maphong) => {
+    themKhachThue = async (hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, sodienthoai, cmnd, maphong) => {
 
         const themKhachThue = await Axios({
             method: 'POST',
@@ -40,9 +61,14 @@ class FormKhachThue extends Component {
 
         if (themKhachThue) {
             console.log('themphong', themKhachThue);
+            await Axios({
+                method: "PUT",
+                url: `http://localhost:4000/checkedTinhTrangPhong/${this.props.KhachHang.values.maphong}`
+
+            })
         }
 
-        // Axios.post('http://localhost:4000/themPhong', { tenphong, succhua, dientich, giaphong, tinhtrangphong, trangthai }).then(response => response.data)
+        // Axios.post('http://localhost:4000/themPhong', { tenphong, succhua, dientich, giaphong, tinhtrangphong }).then(response => response.data)
     }
 
     handleChangeInput = (event) => {
@@ -69,15 +95,17 @@ class FormKhachThue extends Component {
         })
     }
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
+        e.preventDefault()
 
+        let { hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, sodienthoai, cmnd, maphong } = this.props.KhachHang.values
 
-        let { hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, sodienthoai, cmnd, trangthai, maphong } = this.props.KhachHang.values
-
-        this.themKhachThue(hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, sodienthoai, cmnd, trangthai, maphong)
+        this.themKhachThue(hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, sodienthoai, cmnd, maphong)
     }
 
     render() {
+
+        console.log('router', this.props);
         console.log("Mảng Khach Hang ", this.props.KhachHang.values);
         let { hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, maphong, sodienthoai, cmnd } = this.props.KhachHang.values;
         return (
@@ -198,4 +226,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(FormKhachThue)
+export default withRouter(connect(mapStateToProps)(FormKhachThue))

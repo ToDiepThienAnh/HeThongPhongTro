@@ -86,9 +86,10 @@ class DanhSachHopDong extends Component {
         return (
             <div>
                 <div>
-                    <h3 className='text-secondary'>Danh Sách Hợp Đồng Thuê</h3>
-                    <div className='text-right mb-4'>
+                    <h3 className='text-secondary'>Danh Sách Hợp Đồng Thuê Đang Thuê</h3>
 
+                    <div className='d-flex justify-content-between mb-4'>
+                        <Link to="/HopDong/HopDongDaThue" className='btn btn-info'>Danh Sách hợp đồng đã thuê</Link>
                         <Link to="/HopDong/themHopDong" className='btn btn-success'>Tạo Hợp Đồng</Link>
                     </div>
 

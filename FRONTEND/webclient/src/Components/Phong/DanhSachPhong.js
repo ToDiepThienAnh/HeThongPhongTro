@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { Table, Button } from 'antd';
 import { DELELTE_PHONG, SET_DANHSACH_PHONG } from '../../Redux/type/type';
 import { Link } from 'react-router-dom';
+import { value } from 'numeral';
 
 
 
@@ -50,22 +51,39 @@ class DanhSachPhong extends Component {
             render: (giaPhong) => <div>{giaPhong} VNĐ</div>
         },
         {
+            title: 'Trạng thái phòng',
+            dataIndex: 'tinhtrangphong',
+            key: 'tinhtrangphong',
+            render: (tinhtrangphong) => <div>{tinhtrangphong === 'true' ? 'Đã Thuê' : 'Còn Trống'}</div>
+        },
+        {
             title: '',
             dataIndex: 'options',
             key: 'options',
-            render: (maPhong) => (
+            render: (maPhong, record) => (
                 <div>
-                    <Link to={`/Phong/chiTietPhong/${maPhong}`}>
-                        <Button type='primary'>Xem chi tiết</Button>
-                    </Link> &nbsp;
-                    <Button onClick={() => { this.handleDelete(maPhong) }} danger>Xóa</Button> &nbsp;
-                    <Link to={`/Phong/editPhong/${maPhong}`}>
-                        <Button>Sửa</Button></Link>
+                    {record.tinhtrangphong === 'true' ? (
+                        <>
+                            <Link to={`/Phong/chiTietPhong/${maPhong}`}>
+                                <Button type='primary'>Xem chi tiết</Button>
+                            </Link> &nbsp;
+                            <Button onClick={() => { this.handleDelete(maPhong) }} danger>Xóa</Button> &nbsp;
+                            <Link to={`/Phong/editPhong/${maPhong}`}>
+                                <Button>Sửa</Button></Link>
+                        </>
+                    ) : (
+                            <Link to={`/KhachThue/themKhachThue/${record.maphong}`}>
+                                <Button type='ghost'>Thêm khách</Button>
+                            </Link>
+                        )}
                 </div>
             )
         },
 
     ];
+    state = {
+        defaultPhongs: []
+    }
 
     handleDelete = (maPhong) => {
         console.log(maPhong);
@@ -76,10 +94,16 @@ class DanhSachPhong extends Component {
     }
 
     layDanhSachPhong = () => {
-        axios.get('http://localhost:4000/getAllPhong').then(res => this.props.dispatch({
-            type: SET_DANHSACH_PHONG,
-            data: res.data
-        })).catch(err => { console.log(err); })
+        axios.get('http://localhost:4000/getAllPhong').then(res => {
+            this.props.dispatch({
+                type: SET_DANHSACH_PHONG,
+                data: res.data
+            })
+
+            this.setState({
+                defaultPhongs: res.data
+            })
+        }).catch(err => { console.log(err); })
     }
 
     componentDidMount() {
@@ -101,6 +125,21 @@ class DanhSachPhong extends Component {
 
     }
 
+    onChangeSelect = (event) => {
+        let newMangPhong = [...this.state.defaultPhongs]
+
+        if (event.target.value !== 'all') {
+            newMangPhong = this.state.defaultPhongs.filter(phong => {
+                return phong.tinhtrangphong === event.target.value
+            })
+        }
+
+        this.props.dispatch({
+            type: SET_DANHSACH_PHONG,
+            data: newMangPhong
+        })
+    }
+
     render() {
         // console.log('mảng Phòng', this.props.mangPhong);
 
@@ -109,9 +148,10 @@ class DanhSachPhong extends Component {
                 <h3 className='text-secondary'>Danh Sách Phòng</h3>
                 <div className='d-flex justify-content-start mt-3' style={{ gap: '10px' }}>
 
-                    <select className='p-2 text-light bg-info' style={{ cursor: 'pointer', fontSize: '18px' }}>
-                        <option>Còn trống</option>
-                        <option>Cho Thuê</option>
+                    <select onChange={this.onChangeSelect} className='p-2 text-light bg-info' style={{ cursor: 'pointer', fontSize: '18px' }}>
+                        <option value='all'>Tất cả</option>
+                        <option value='false'>Còn trống</option>
+                        <option value='true'>Cho Thuê</option>
                     </select>
                     <select className='p-2 text-light bg-info' style={{ cursor: 'pointer', fontSize: '18px' }}>
                         <option>Đã thu phí</option>
@@ -120,12 +160,12 @@ class DanhSachPhong extends Component {
                     <input className='form-control w-25'></input>
                     <button className='btn btn-primary '><i class="fa fa-search"></i><span>Tìm kiếm</span></button>
                 </div>
-                <div className='pb-4 border-bottom'>
+                {/* <div className='pb-4 border-bottom'>
                     <span>Còn trống 1 |</span>
                     <span> Đã cho thuê 1 |</span>
                     <span> Chưa thu phí 1 |</span>
                     <span> Đã thu phí 1 |</span>
-                </div>
+                </div> */}
                 <div className='text-right'>
                     <Link to='/Phong/themPhong'>
                         <button className='btn btn-success my-2 mr-4'><i class="fa fa-bed"></i><span className='ml-2'>Thêm phòng</span></button>

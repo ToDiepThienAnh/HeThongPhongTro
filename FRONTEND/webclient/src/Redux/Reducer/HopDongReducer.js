@@ -3,6 +3,7 @@ import { SET_MA_KHACHHANG, SET_DANHSACH_HOPDONG, SET_KHACHHANG_PHONG, SET_MAPHON
 
 const stateDefault = {
     mangHopDong: [],
+    mangHopDongDaThue: [],
     HopDong: {
         values: {
             maphong: '',
@@ -38,6 +39,19 @@ const HoaDonReducer = (state = stateDefault, action) => {
             }))
 
             state.mangHopDong = [...newMangHopDong]
+
+            return { ...state }
+        }
+        case 'SET_DANHSACH_HOPDONG_DATHUE': {
+            let newMangHopDong = [];
+
+            newMangHopDong = action.data.map(hopdong => ({
+                ...hopdong,
+                key: hopdong.mahopdong,
+                options: {}
+            }))
+
+            state.mangHopDongDaThue = [...newMangHopDong]
 
             return { ...state }
         }
