@@ -68,7 +68,9 @@ class DanhSachPhong extends Component {
                             </Link> &nbsp;
                             <Button onClick={() => { this.handleDelete(maPhong) }} danger>Xóa</Button> &nbsp;
                             <Link to={`/Phong/editPhong/${maPhong}`}>
-                                <Button>Sửa</Button></Link>
+                                <Button>Sửa</Button></Link> &nbsp;
+
+                            <Button type='primary' onClick={() => { this.traPhong(maPhong) }} danger>Trả Phòng</Button>
                         </>
                     ) : (
                             <Link to={`/KhachThue/themKhachThue/${record.maphong}`}>
@@ -90,6 +92,26 @@ class DanhSachPhong extends Component {
             type: DELELTE_PHONG,
             maPhong
         })
+    }
+
+    traPhong = async (maphong) => {
+        let xoaKhachThue = await axios({
+            method: 'PUT',
+            url: `http://localhost:4000/xoaKhachThueTheoMaPhong/${maphong}`
+        })
+
+        const xoaHopDong = await axios({
+            method: 'PUT',
+            url: `http://localhost:4000/huyHopDong/${maphong}`
+        })
+
+        const setTrangThaiPhong = await axios({
+            method: 'PUT',
+            url: `http://localhost:4000/rejectTinhTrangPhong/${maphong}`
+        })
+        if (xoaKhachThue && xoaHopDong && setTrangThaiPhong) {
+            alert('Trả phòng thành công')
+        }
     }
 
     layDanhSachPhong = () => {

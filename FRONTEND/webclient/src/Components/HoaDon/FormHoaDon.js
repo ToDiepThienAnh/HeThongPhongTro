@@ -150,6 +150,7 @@ class FormHoaDon extends Component {
         const newValues = { ...this.props.HoaDon.values }
 
         newValues[name] = value
+
         console.log(name, value);
         //Xử lý errors 
         const newErrors = { ...this.props.HoaDon.errors }; //Giữ lại các giá trị errors cũ
