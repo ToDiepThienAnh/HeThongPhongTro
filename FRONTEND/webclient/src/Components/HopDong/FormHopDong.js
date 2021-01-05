@@ -9,6 +9,10 @@ class FormHopDong extends Component {
     // state = {
     //     mangKhachHang: []
     // }
+    state = {
+        mangPhong: [],
+        mangKhachHang: []
+    }
 
 
     themHopDong = async (maphong, makhachhang, ngaythue, ngayhethan, kythanhtoan, thoihan) => {
@@ -59,6 +63,32 @@ class FormHopDong extends Component {
     //     })).catch(err => { console.log(err); })
     // }
 
+    layDanhSachPhong = async () => {
+        const layDanhSachPhong = await Axios({
+            method: 'GET',
+            url: 'http://localhost:4000/getAllPhong'
+        })
+
+        if (layDanhSachPhong) {
+            this.setState({
+                mangPhong: layDanhSachPhong.data
+            })
+        }
+    }
+
+    layDanhSachKhachHang = async () => {
+        const layDanhSachKhachHang = await Axios({
+            method: 'GET',
+            url: 'http://localhost:4000/getAllKhachHang'
+        })
+
+        if (layDanhSachKhachHang) {
+            this.setState({
+                mangKhachHang: layDanhSachKhachHang.data
+            })
+        }
+    }
+
     // layThongTinKhachHang = () => {
     //     Axios.get('http://localhost:4000/getAllKhachHang').then(res => this.setState({
     //         mangKhachHang: res.data
@@ -68,14 +98,24 @@ class FormHopDong extends Component {
 
 
     componentDidMount() {
-        // this.layThongTinPhong();
-        // this.layThongTinKhachHang()
+        this.layDanhSachPhong();
+        this.layDanhSachKhachHang();
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
+
+
+
         let { maphong, makhachhang, ngaythue, ngayhethan, kythanhtoan, thoihan } = this.props.HopDong.values
+
+        if (new Date(ngayhethan).getTime() < new Date(ngaythue).getTime()) {
+            alert('Ngày kết thúc hợp đồng phải lớn hơn ngày thuê')
+            return
+        }
+
         this.themHopDong(maphong, makhachhang, ngaythue, ngayhethan, kythanhtoan, thoihan);
+        alert('Thêm thành công ')
     }
 
     render() {
@@ -97,31 +137,33 @@ class FormHopDong extends Component {
                     <div className='row text-secondary'>
                         <div className='col-6'>
                             <div className="form-group row px-2">
-                                <div className='col-4 pr-0'><p>Mã Khách Thuê</p></div>
+                                <div className='col-4 pr-0'><p> Khách Thuê</p></div>
                                 <div className='col-8 pl-0'>
-                                    <input onChange={this.handleChangeInput} typeInput='number' type="text" name='makhachhang' placeholder="Nhập mã khách thuê" className="form-control" />
-                                    {/* <select className='form-control' value={makhachhang} name='makhachhang'>
+                                    {/* <input onChange={this.handleChangeInput} typeInput='number' type="text" name='makhachhang' placeholder="Nhập mã khách thuê" className="form-control" /> */}
+                                    <select className='form-control' onChange={this.handleChangeInput} value={makhachhang} name='makhachhang'>
+                                        <option>-- Vui lòng chọn khách thuê ---</option>
                                         {this.state.mangKhachHang.map((item, index) => {
                                             return <option key={index} value={item.makhachhang}>{item.hoten}
 
                                             </option>
                                         })}
-                                    </select> */}
+                                    </select>
                                     <p className='text-danger'>{this.props.HopDong.errors.makhachhang}</p>
                                 </div>
 
                             </div>
                             <div className="form-group row px-2">
-                                <div className='col-4 pr-0'><p>Số Phòng</p></div>
+                                <div className='col-4 pr-0'><p> Phòng</p></div>
                                 <div className='col-8 pl-0'>
-                                    <input onChange={this.handleChangeInput} name='maphong' value={maphong} type="number" placeholder="Nhập số phòng" min='1' className="form-control" />
-                                    {/* <select className='form-control' name='maphong' value={maphong} >
-                                        {this.props.mangMaPhong[0].map((item, index) => {
-                                            return <option key={index} value={item.maphong}>{item.maphong}
-
+                                    {/* <input onChange={this.handleChangeInput} name='maphong' value={maphong} type="number" placeholder="Nhập số phòng" min='1' className="form-control" /> */}
+                                    <select onChange={this.handleChangeInput} className='form-control' name='maphong' value={maphong} >
+                                        <option>-- Vui lòng chọn phòng ---</option>
+                                        {this.state.mangPhong.map((phong, index) => {
+                                            return <option key={index} value={phong.maphong}>
+                                                {phong.tenphong}
                                             </option>
                                         })}
-                                    </select> */}
+                                    </select>
                                 </div>
 
                             </div>
@@ -129,8 +171,15 @@ class FormHopDong extends Component {
                                 <div className='col-4 pr-0'><p>Thời Hạn HĐ</p></div>
                                 <div className='col-8 pl-0'>
                                     <div className="input-group mb-3">
-                                        <input onChange={this.handleChangeInput} type="text" name='thoihan' value={thoihan} className="form-control" />
-                                        <span className="input-group-text">Tháng</span>
+                                        {/* <input onChange={this.handleChangeInput} type="number" name='thoihan' value={thoihan} max='6' min='1' placeholder='Thời hạn hợp đồng tối đa ' className="form-control" /> */}
+                                        <select className='form-control' onChange={this.handleChangeInput} name='thoihan' value={thoihan}>
+                                            <option>-- Vui lòng chọn thời hạn hợp đồng --- </option>
+                                            <option value='1'>1 tháng</option>
+                                            <option value='3'>3 tháng</option>
+                                            <option value='6'>6 tháng </option>
+                                            <option value='12'>1 năm </option>
+                                        </select>
+                                        {/* <span className="input-group-text">Tháng</span> */}
                                     </div>
                                 </div>
 
@@ -139,8 +188,14 @@ class FormHopDong extends Component {
                                 <div className='col-4 pr-0'><p>Kỳ Thanh Toán</p></div>
                                 <div className='col-8 pl-0'>
                                     <div className="input-group mb-3">
-                                        <input type="number" min='1' max='6' onChange={this.handleChangeInput} name='kythanhtoan' value={kythanhtoan} placeholder='Kỳ hạn thanh toán từ 1 tháng đến 6 tháng' className="form-control" />
-                                        <span className="input-group-text">Tháng</span>
+                                        {/* <input type="number" min='1' max='6' onChange={this.handleChangeInput} name='kythanhtoan' value={kythanhtoan} placeholder='Kỳ hạn thanh toán từ 1 tháng đến 6 tháng' className="form-control" />
+                                        <span className="input-group-text">Tháng</span> */}
+                                        <select className='form-control' onChange={this.handleChangeInput} name='kythanhtoan' value={kythanhtoan}>
+                                            <option> Vui lòng chọn kỳ thanh toán </option>
+                                            <option value='1'>1 tháng</option>
+                                            <option value='3'>3 tháng</option>
+                                            <option value='6'>6 tháng </option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -175,8 +230,7 @@ class FormHopDong extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        HopDong: state.HopDongReducer.HopDong,
-        mangMaPhong: state.HopDongReducer.mangMaPhong
+        HopDong: state.HopDongReducer.HopDong
     }
 }
 

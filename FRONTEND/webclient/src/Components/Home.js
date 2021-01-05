@@ -29,6 +29,7 @@ import ThemNhanVien from './NhanVien/ThemNhanVien'
 import ChinhSuaNhanVien from './NhanVien/ChinhSuaNhanVien'
 import DanhSachHopDongDaThue from './HopDong/DanhSachHopDongDaThue'
 import DanhSachHoaDonDaThanhToan from './HoaDon/DanhSachHoaDonDaThanhToan'
+import KhachThueTraPhong from './KhachThue/KhachThueTraPhong'
 
 export default class Home extends Component {
     render() {
@@ -64,7 +65,7 @@ export default class Home extends Component {
                             {/* ChiTiet  */}
                             <Route path='/HopDong/chiTietHopDong' exact component={ChiTietHopDong} />
                             <Route path='/Phong/chiTietPhong/:id' exact component={ChiTietPhong} />
-                            <Route path='/KhachThue/chiTietKhachThue' exact component={ChiTietKhachThue} />
+                            <Route path='/KhachThue/chiTietKhachThue/:id' exact component={ChiTietKhachThue} />
                             <Route path='/HoaDon/chiTietHoaDon' exact component={ChiTietHoaDon} />
                             {/* Sửa thông tin */}
                             <Route path='/HopDong/editHopDong' exact component={ChinhSuaHopDong} />
@@ -76,6 +77,8 @@ export default class Home extends Component {
                             <Route path='/HopDong/HopDongDaThue' exact component={DanhSachHopDongDaThue} />
                             {/* Danh sách hóa đơn đã thanh toán */}
                             <Route path='/HoaDon/HoaDonDaThanhToan' exact component={DanhSachHoaDonDaThanhToan} />
+                            {/* Danh sách Khách Trả Phòng */}
+                            <Route path='/KhachThue/KhachThueTraPhong' exact component={KhachThueTraPhong} />
                             <Redirect to='/Phong' />
 
                         </Switch>

@@ -1,15 +1,17 @@
-import { InputNumber, Table } from 'antd'
+import { Button, InputNumber, Table } from 'antd'
 import Axios from 'axios'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SET_DANHSACH_DICHVU, SET_HOADON, UPDATE_CHISO } from '../../Redux/type/type'
 import numeral from 'numeral'
-import { min } from 'moment'
-class FormHoaDon extends Component {
+import moment from 'moment'
+import { isEqual } from 'lodash'
 
+class FormHoaDon extends Component {
     state = {
-        mangPhong: []
+        mangPhong: [],
+        giaphong: 0
     }
 
     layDanhSachPhong = async () => {
@@ -44,6 +46,8 @@ class FormHoaDon extends Component {
                 index, value
             }
         })
+
+        this.caculateTotal(this.state.giaphong)
     }
 
     columns = [
@@ -110,7 +114,36 @@ class FormHoaDon extends Component {
         })
     }
 
-    handleChangeInput = (event) => {
+    caculateTotal = (giaphong) => {
+        console.log("FormHoaDon -> caculateTotal -> giaphong", giaphong)
+        const { mangDichVu } = this.props
+        // console.log("FormHoaDon -> renderTotal -> mangDichVu", mangDichVu)
+        const total = mangDichVu.reduce((accumulator, currentValue) => {
+            // console.log("FormHoaDon -> renderTotal -> currentValue", currentValue)
+            // console.log("FormHoaDon -> renderTotal -> accumulator", accumulator)
+            return accumulator + (+currentValue.tongtiendichvu)
+        }, 0)
+        const final = +giaphong + (+total);
+        console.log("FormHoaDon -> caculateTotal -> final", final)
+        const newValues = { ...this.props.HoaDon.values }
+        newValues.thanhtien = final;
+
+        this.props.dispatch({
+            type: SET_HOADON,
+            HoaDon: {
+                ...this.props.HoaDon,
+                values: newValues,
+            }
+        })
+    }
+
+    handleChangeInput = (event, type) => {
+        const giaphong = document.getElementById(`form-hoa-don-phong-${event.target.value}`).getAttribute('giaphong')
+        // console.log("FormHoaDon -> handleChangeInput -> giaphong", giaphong)
+        this.setState({
+            giaphong
+        })
+
         let { value, name } = event.target
         let typeInput = event.target.getAttribute('typeInput') //attribute là thuộc tính người dùng tự thêm trên thẻ
 
@@ -130,7 +163,6 @@ class FormHoaDon extends Component {
             }
         }
 
-
         console.log(newValues);
         this.props.dispatch({
             type: SET_HOADON,
@@ -139,12 +171,20 @@ class FormHoaDon extends Component {
                 errors: newErrors
             }
         })
+
+        if (type === 'maphong') {
+            this.caculateTotal(giaphong)
+        }
     }
 
     handleSubmit = (e) => {
         let { tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi, namthanhtoan } = this.props.HoaDon.values
         this.themHoaDon(tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi, namthanhtoan);
     }
+
+    // onClickPhong = (phong) => {
+    //     console.log("FormHoaDon -> onClickPhong -> phong", phong)
+    // }
 
     render() {
         console.log("Hoa Don", this.props.HoaDon);
@@ -169,10 +209,10 @@ class FormHoaDon extends Component {
                             </div>
                             <div className='col-8 pl-0'>
                                 {/* <input onChange={this.handleChangeInput} className='form-control' name="maphong" value={maphong} typeInput='number' type="text"></input> */}
-                                <select onChange={this.handleChangeInput} className='form-control' name="maphong" value={maphong} >
+                                <select onChange={(e) => this.handleChangeInput(e, 'maphong')} className='form-control' name="maphong" value={maphong} >
                                     <option>-- Vui lòng chọn tên phòng---</option>
                                     {this.state.mangPhong.map((phong, index) => {
-                                        return <option key={index} value={phong.maphong}>
+                                        return <option key={index} id={`form-hoa-don-phong-${phong.maphong}`} value={phong.maphong} giaphong={phong.giaphong}>
                                             {phong.tenphong}
                                         </option>
                                     })}
@@ -223,7 +263,7 @@ class FormHoaDon extends Component {
                                 <p>Ngày lập *</p>
                             </div>
                             <div className='col-8 pl-0'>
-                                <input name="ngaylap" value={ngaylap} onChange={this.handleChangeInput} className='form-control' type="date"></input>
+                                <input name="ngaylap" value={ngaylap} onChange={this.handleChangeInput} className='form-control' type="date" max={moment().format('YYYY-MM-DD')}></input>
                                 <p className='text-danger'>{this.props.HoaDon.errors.ngaylap}</p>
                             </div>
                         </div>
@@ -234,7 +274,7 @@ class FormHoaDon extends Component {
                                 <p>Giá Phòng </p>
                             </div>
                             <div className='col-8 pl-0'>
-                                <input name="giaphong" disabled className='form-control' ></input>
+                                <input name="giaphong" value={this.state.giaphong} disabled className='form-control' ></input>
                                 <p className='text-danger'>{this.props.HoaDon.errors.namthanhtoan}</p>
                             </div>
                         </div>

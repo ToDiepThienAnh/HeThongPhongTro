@@ -1142,7 +1142,7 @@ router.get('/getKhachThue/:id', function (req, res, next) {
 
     console.log('id', id)
 
-    pool.query('SELECT * FROM khachhang WHERE makhachhang = $1', [id], (error, results) => {
+    pool.query('SELECT * FROM khachhang inner join phong on khachhang.makhachhang = phong.maphong WHERE makhachhang = $1', [id], (error, results) => {
         if (error) {
             throw error
         }
@@ -1150,6 +1150,36 @@ router.get('/getKhachThue/:id', function (req, res, next) {
     })
 
 });
+
+// xóa Khách Thuê 
+router.put('/xoaKhachThue/:id', function (req, res, next) {
+    // Website you wish to allow to connect
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    var id = parseInt(req.params.id)
+
+    pool
+        .query(`update khachhang set trangthai = true where makhachhang = ${id}`, (error, response) => {
+            if (error) {
+                console.log(error);
+            } else {
+                res.send('Đã update dữ liệu thành công');
+            }
+        })
+});
+
 // thêm Khách Thuê
 router.get('/themKhachThue', function (req, res, next) {
     // Website you wish to allow to connect
@@ -1381,6 +1411,35 @@ router.get('/getKhachHangOfPhong', function (req, res, next) {
             })
         )
 
+});
+
+// hủy hợp đồng thuê đang thuê
+router.put('/huyHopDong/:id', function (req, res, next) {
+    // Website you wish to allow to connect
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    var id = parseInt(req.params.id)
+
+    pool
+        .query(`update hopdongthue set tinhtranghopdong = true where maphong = ${id}`, (error, response) => {
+            if (error) {
+                console.log(error);
+            } else {
+                res.send('Đã update dữ liệu thành công');
+            }
+        })
 });
 
 // API cho Hóa Đơn

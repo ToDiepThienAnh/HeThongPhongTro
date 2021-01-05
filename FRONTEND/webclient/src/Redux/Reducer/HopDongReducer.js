@@ -35,7 +35,7 @@ const HoaDonReducer = (state = stateDefault, action) => {
             newMangHopDong = action.data.map(hopdong => ({
                 ...hopdong,
                 key: hopdong.mahopdong,
-                options: {}
+                options: hopdong.maphong
             }))
 
             state.mangHopDong = [...newMangHopDong]
@@ -48,7 +48,7 @@ const HoaDonReducer = (state = stateDefault, action) => {
             newMangHopDong = action.data.map(hopdong => ({
                 ...hopdong,
                 key: hopdong.mahopdong,
-                options: {}
+                options: hopdong.maphong
             }))
 
             state.mangHopDongDaThue = [...newMangHopDong]

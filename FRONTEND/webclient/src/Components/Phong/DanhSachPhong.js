@@ -9,7 +9,6 @@ import { value } from 'numeral';
 
 
 
-
 // const data = [];
 // for (let i = 0; i < 46; i++) {
 //     data.push({

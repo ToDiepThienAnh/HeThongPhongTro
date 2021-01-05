@@ -3,6 +3,7 @@ import { SET_DANHSACH_KHACHHANG, SET_KHACHHANG } from "../type/type";
 
 const stateDefault = {
     mangKhachHang: [],
+    mangKhachHangTraPhong: [],
     KhachHang: {
         values: {
             hoten: "",
@@ -42,6 +43,19 @@ const KhachHangReducer = (state = stateDefault, action) => {
             }))
 
             state.mangKhachHang = [...newMangKhachHang]
+
+            return { ...state }
+        }
+        case 'SET_KHACHHANG_TRAPHONG': {
+            let newMangKhachHang = [];
+
+            newMangKhachHang = action.data.map(kh => ({
+                ...kh,
+                key: kh.makhachhang,
+                options: kh.makhachhang
+            }))
+
+            state.mangKhachHangTraPhong = [...newMangKhachHang]
 
             return { ...state }
         }
