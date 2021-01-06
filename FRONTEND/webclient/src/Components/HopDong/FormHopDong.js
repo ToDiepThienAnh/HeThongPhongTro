@@ -15,7 +15,7 @@ class FormHopDong extends Component {
     }
 
 
-    themHopDong = async (maphong, makhachhang, ngaythue, ngayhethan, kythanhtoan, thoihan) => {
+    themHopDong = async (maphong, makhachhang, ngaythue, ngayhethan, kythanhtoan, tiencoc) => {
 
         const themHopDong = await Axios({
             method: 'POST',
@@ -107,14 +107,21 @@ class FormHopDong extends Component {
 
 
 
-        let { maphong, makhachhang, ngaythue, ngayhethan, kythanhtoan, thoihan } = this.props.HopDong.values
+        let { maphong, makhachhang, ngaythue, ngayhethan, kythanhtoan, tiencoc } = this.props.HopDong.values
 
         if (new Date(ngayhethan).getTime() < new Date(ngaythue).getTime()) {
             alert('Ngày kết thúc hợp đồng phải lớn hơn ngày thuê')
             return
         }
 
-        this.themHopDong(maphong, makhachhang, ngaythue, ngayhethan, kythanhtoan, thoihan);
+        for (const i in this.props.mangHopDong) {
+            if (this.props.mangHopDong[i].maphong === parseInt(maphong)) {
+                alert('Phòng này đã có hợp đồng rồi !!!')
+                return
+            }
+        }
+
+        this.themHopDong(maphong, makhachhang, ngaythue, ngayhethan, kythanhtoan, tiencoc);
         alert('Thêm thành công ')
     }
 
@@ -122,7 +129,8 @@ class FormHopDong extends Component {
         // console.log(this.props.mangMaPhong, "mang Ma Phong");
         // console.log(this.state.mangKhachHang, "mang Khach Hang");
         console.log("Hop Dong", this.props.HopDong.values);
-        let { maphong, makhachhang, ngaythue, ngayhethan, kythanhtoan, thoihan } = this.props.HopDong.values
+        console.log("Mảng Hop Dong", this.props.mangHopDong);
+        let { maphong, makhachhang, ngaythue, ngayhethan, kythanhtoan, tiencoc } = this.props.HopDong.values
         return (
             <div>
                 <h3 className='text-secondary py-2'>Lập Hợp Đồng Mới</h3>
@@ -168,16 +176,16 @@ class FormHopDong extends Component {
 
                             </div>
                             <div className="form-group row px-2">
-                                <div className='col-4 pr-0'><p>Thời Hạn HĐ</p></div>
+                                <div className='col-4 pr-0'><p>Tiền Đặt Cọc *</p></div>
                                 <div className='col-8 pl-0'>
                                     <div className="input-group mb-3">
-                                        {/* <input onChange={this.handleChangeInput} type="number" name='thoihan' value={thoihan} max='6' min='1' placeholder='Thời hạn hợp đồng tối đa ' className="form-control" /> */}
-                                        <select className='form-control' onChange={this.handleChangeInput} name='thoihan' value={thoihan}>
-                                            <option>-- Vui lòng chọn thời hạn hợp đồng --- </option>
-                                            <option value='1'>1 tháng</option>
-                                            <option value='3'>3 tháng</option>
-                                            <option value='6'>6 tháng </option>
-                                            <option value='12'>1 năm </option>
+                                        {/* <input onChange={this.handleChangeInput} type="number" name='tiencoc' value={tiencoc} max='6' min='1' placeholder='Thời hạn hợp đồng tối đa ' className="form-control" /> */}
+                                        <select className='form-control' onChange={this.handleChangeInput} name='tiencoc' value={tiencoc}>
+                                            <option>-- Vui lòng chọn Tiền Cọc --- </option>
+                                            <option value='1500000'>1500000 VNĐ</option>
+                                            <option value='1800000'>1800000 VNĐ</option>
+                                            <option value='2000000'>2000000 VNĐ </option>
+                                            <option value='2200000'>2200000 VNĐ </option>
                                         </select>
                                         {/* <span className="input-group-text">Tháng</span> */}
                                     </div>
@@ -230,7 +238,8 @@ class FormHopDong extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        HopDong: state.HopDongReducer.HopDong
+        HopDong: state.HopDongReducer.HopDong,
+        mangHopDong: state.HopDongReducer.mangHopDong
     }
 }
 

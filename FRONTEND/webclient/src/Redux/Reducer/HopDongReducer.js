@@ -10,7 +10,7 @@ const stateDefault = {
             makhachhang: '',
             ngaythue: '',
             ngayhethan: '',
-            thoihan: '',
+            tiencoc: '',
             kythanhtoan: ''
         },
         errors: {
@@ -18,7 +18,7 @@ const stateDefault = {
             makhachhang: '',
             ngaythue: '',
             ngayhethan: '',
-            thoihan: '',
+            tiencoc: '',
             kythanhtoan: ''
         }
     },

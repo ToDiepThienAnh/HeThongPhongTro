@@ -26,7 +26,8 @@ class FormKhachThue extends Component {
     //     })
     // }
     state = {
-        mangPhong: []
+        mangPhong: [],
+        soLuongKhachThue: 0
     }
 
 
@@ -43,10 +44,23 @@ class FormKhachThue extends Component {
         }
     }
 
+    tinhSoLuongKhachThue = async (maphong) => {
+        const soLuongKhachThue = await Axios({
+            method: 'GET',
+            url: `http://localhost:4000/countKhachHang/${maphong}`
+        })
+        if (soLuongKhachThue) {
+            this.setState({
+                soLuongKhachThue: soLuongKhachThue.data
+            })
+        }
+    }
+
     componentDidMount() {
         console.log(this.props.match.params.id);
 
         this.layDanhSachPhong()
+
 
         const newValues = { ...this.props.KhachHang.values };
 
@@ -70,6 +84,37 @@ class FormKhachThue extends Component {
 
 
     themKhachThue = async (hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, sodienthoai, cmnd, maphong) => {
+        var sucChuaToiDa = 0
+        var count = 0
+        for (const item in this.props.mangKhachHang) {
+
+
+            if (this.props.mangKhachHang[item].maphong === parseInt(maphong)) {
+                count++
+            }
+
+        }
+        for (const item in this.state.mangPhong) {
+
+
+            if (this.state.mangPhong[item].maphong === parseInt(maphong)) {
+                sucChuaToiDa = this.state.mangPhong[item].succhua
+            }
+
+        }
+        console.log("count ", count);
+        console.log("Sức chứa tối đa", sucChuaToiDa);
+        if (count >= sucChuaToiDa) {
+            alert('Phòng đã đủ người rồi !!')
+            return
+        }
+
+        for (const i in this.props.mangKhachHang) {
+            if (this.props.mangKhachHang[i].cmnd === cmnd) {
+                alert('CMND/CCCD không được trùng')
+                return
+            }
+        }
 
         const themKhachThue = await Axios({
             method: 'POST',
@@ -84,6 +129,7 @@ class FormKhachThue extends Component {
                 url: `http://localhost:4000/checkedTinhTrangPhong/${this.props.KhachHang.values.maphong}`
 
             })
+            alert("Thêm khách thuê thành công")
         }
 
         // Axios.post('http://localhost:4000/themPhong', { tenphong, succhua, dientich, giaphong, tinhtrangphong }).then(response => response.data)
@@ -137,6 +183,8 @@ class FormKhachThue extends Component {
 
     render() {
         console.log("Danh Sách Phòng ", this.state);
+        console.log("Danh Sách Khách Hàng ", this.props.mangKhachHang);
+        // console.log("chiều dài của mảng phòng", this.state.mangPhong.length);
         // console.log('router', this.props);
         // console.log("Mảng Khach Hang ", this.props.KhachHang.values);
         let { hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, maphong, sodienthoai, cmnd } = this.props.KhachHang.values;
@@ -181,7 +229,7 @@ class FormKhachThue extends Component {
                             <div className="form-group row px-2">
                                 <div className='col-4 pr-0'><p>Ngày sinh (dd/MM/yyyy) *</p></div>
                                 <div className='col-8 pl-0'><input
-                                    name='ngaysinh' type="date" onChange={this.handleChangeInput} value={ngaysinh} className="form-control" />
+                                    name='ngaysinh' type="date" onChange={this.handleChangeInput} value={ngaysinh} className="form-control" max={moment('2005-1-1').format('YYYY-MM-DD')} />
                                     <p className='text-danger'>{this.props.KhachHang.errors.ngaysinh}</p></div>
 
                             </div>
@@ -254,7 +302,8 @@ class FormKhachThue extends Component {
 const mapStateToProps = (state) => {
     return {
         mangPhong: state.PhongReducer.mangPhong,
-        KhachHang: state.KhachHangReducer.KhachHang
+        KhachHang: state.KhachHangReducer.KhachHang,
+        mangKhachHang: state.KhachHangReducer.mangKhachHang
     }
 }
 

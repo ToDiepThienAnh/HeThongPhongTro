@@ -433,14 +433,14 @@
 
 //   var ngaythue = req.body.ngaythue,
 //     ngayhethan = req.body.ngayhethan,
-//     thoihan = parseInt(req.body.thoihan),
+//     tiencoc = parseInt(req.body.tiencoc),
 //     kythanhtoan = parseInt(req.body.kythanhtoan),
 //     maphong = req.body.maphong,
 //     makhachhang = req.body.makhachhang
 
 
 //   pool
-//     .query('insert into hopdongthue (ngaythue, ngayhethan, thoihan, kythanhtoan, maphong, makhachhang) values ($1,$2,$3,$4,$5,$6)', [ngaythue, ngayhethan, thoihan, kythanhtoan, maphong, makhachhang], (error, response) => {
+//     .query('insert into hopdongthue (ngaythue, ngayhethan, tiencoc, kythanhtoan, maphong, makhachhang) values ($1,$2,$3,$4,$5,$6)', [ngaythue, ngayhethan, tiencoc, kythanhtoan, maphong, makhachhang], (error, response) => {
 //       if (error) {
 //         console.log(error);
 //       } else {
@@ -1092,6 +1092,38 @@ router.get('/getAllKhachHang', function (req, res, next) {
 
 });
 
+// tính số lượng khách hàng trong 1 phòng
+router.get('/countKhachHang/:id', function (req, res, next) {
+    // Website you wish to allow to connect
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    const id = parseInt(req.params.id)
+
+
+    pool
+        .query(`SELECT COUNT(maphong)
+        FROM khachhang
+        where maphong = ${id}`)
+        .then(respond => res.send(respond.rows))
+        .catch(error =>
+            setImmediate(() => {
+                throw error
+            })
+        )
+
+});
+
 // lấy danh sách khách hàng đã trả phòng
 router.get('/getAllKhachHangTraPhong', function (req, res, next) {
     // Website you wish to allow to connect
@@ -1335,7 +1367,7 @@ router.post('/themHopDong', function (req, res, next) {
 
     var ngaythue = req.body.ngaythue,
         ngayhethan = req.body.ngayhethan,
-        thoihan = req.body.thoihan,
+        tiencoc = req.body.tiencoc,
         kythanhtoan = req.body.kythanhtoan,
         maphong = req.body.maphong,
         makhachhang = req.body.makhachhang
@@ -1343,7 +1375,7 @@ router.post('/themHopDong', function (req, res, next) {
 
 
     pool
-        .query('insert into hopdongthue (ngaythue, ngayhethan, thoihan, kythanhtoan, maphong, makhachhang) values ($1,$2,$3,$4,$5,$6,$7)', [ngaythue, ngayhethan, thoihan, kythanhtoan, maphong, makhachhang, tinhtranghopdong], (error, response) => {
+        .query('insert into hopdongthue (ngaythue, ngayhethan, tiencoc, kythanhtoan, maphong, makhachhang, tinhtranghopdong) values ($1,$2,$3,$4,$5,$6,$7)', [ngaythue, ngayhethan, tiencoc, kythanhtoan, maphong, makhachhang, tinhtranghopdong], (error, response) => {
             if (error) {
                 console.log(error);
             } else {
