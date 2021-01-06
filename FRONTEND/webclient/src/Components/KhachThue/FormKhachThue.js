@@ -4,6 +4,8 @@ import { SET_DANHSACH_PHONG, SET_KHACHHANG } from '../../Redux/type/type'
 import Axios from 'axios'
 import { connect } from 'react-redux'
 import { isEqual } from 'lodash'
+import moment from 'moment'
+
 class FormKhachThue extends Component {
 
     // getMangMaPhong = async () => {

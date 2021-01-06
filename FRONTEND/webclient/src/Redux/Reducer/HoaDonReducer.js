@@ -13,7 +13,6 @@ const stateDefault = {
             tenphieuthu: "",
             thanhtien: "",
             tinhtrangphi: "",
-            namthanhtoan: "",
             maphong: ""
         },
         errors: {
@@ -23,7 +22,6 @@ const stateDefault = {
             tenphieuthu: "",
             thanhtien: "",
             tinhtrangphi: "",
-            namthanhtoan: "",
             maphong: ""
         }
     }
@@ -60,6 +58,7 @@ const HoaDonReducer = (state = stateDefault, action) => {
         }
         case SET_HOADON: {
             state.HoaDon = action.HoaDon
+            // console.log("HoaDon::", action.HoaDon)
             return { ...state }
         }
         default:

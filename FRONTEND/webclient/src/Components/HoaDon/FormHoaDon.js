@@ -124,34 +124,29 @@ class FormHoaDon extends Component {
             return accumulator + (+currentValue.tongtiendichvu)
         }, 0)
         const final = +giaphong + (+total);
-        console.log("FormHoaDon -> caculateTotal -> final", final)
+        // console.log("FormHoaDon -> caculateTotal -> final", final)
         const newValues = { ...this.props.HoaDon.values }
+        console.log("Calculate ::", "gia phong::", giaphong)
         newValues.thanhtien = final;
 
-        this.props.dispatch({
-            type: SET_HOADON,
-            HoaDon: {
-                ...this.props.HoaDon,
-                values: newValues,
-            }
-        })
+        return newValues
     }
 
     handleChangeInput = (event, type) => {
-        const giaphong = document.getElementById(`form-hoa-don-phong-${event.target.value}`).getAttribute('giaphong')
+        let giaphong
+        if (type === 'maphong') {
+            giaphong = document.getElementById(`form-hoa-don-phong-${event.target.value}`).getAttribute('giaphong')
+            this.setState({
+                giaphong
+            })
+        }
         // console.log("FormHoaDon -> handleChangeInput -> giaphong", giaphong)
-        this.setState({
-            giaphong
-        })
-
         let { value, name } = event.target
         let typeInput = event.target.getAttribute('typeInput') //attribute là thuộc tính người dùng tự thêm trên thẻ
 
         const newValues = { ...this.props.HoaDon.values }
 
         newValues[name] = value
-
-        console.log(name, value);
         //Xử lý errors 
         const newErrors = { ...this.props.HoaDon.errors }; //Giữ lại các giá trị errors cũ
         //Nếu value của trường đang nhập bị rổng thì gán lỗi cho trường đó
@@ -164,23 +159,27 @@ class FormHoaDon extends Component {
             }
         }
 
-        console.log(newValues);
+        let thanhtien = { ...newValues }
+        if (type === 'maphong') {
+            thanhtien = this.caculateTotal(giaphong)
+        }
+
+        newValues.thanhtien = thanhtien.thanhtien
         this.props.dispatch({
             type: SET_HOADON,
             HoaDon: {
-                values: newValues,
-                errors: newErrors
+                errors: newErrors,
+                values: newValues
             }
         })
 
-        if (type === 'maphong') {
-            this.caculateTotal(giaphong)
-        }
+
+
     }
 
     handleSubmit = (e) => {
-        let { tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi, namthanhtoan } = this.props.HoaDon.values
-        this.themHoaDon(tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi, namthanhtoan);
+        let { tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi } = this.props.HoaDon.values
+        this.themHoaDon(tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi);
     }
 
     // onClickPhong = (phong) => {
@@ -190,7 +189,7 @@ class FormHoaDon extends Component {
     render() {
         console.log("Hoa Don", this.props.HoaDon);
         // console.log("mảng Dịch vụ", this.props.mangDichVu);
-        let { tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi, namthanhtoan } = this.props.HoaDon.values
+        let { tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi } = this.props.HoaDon.values
         return (
             <div className='container text-secondary'>
                 <div className='d-flex justify-content-between'>
@@ -210,8 +209,8 @@ class FormHoaDon extends Component {
                             </div>
                             <div className='col-8 pl-0'>
                                 {/* <input onChange={this.handleChangeInput} className='form-control' name="maphong" value={maphong} typeInput='number' type="text"></input> */}
-                                <select onChange={(e) => this.handleChangeInput(e, 'maphong')} className='form-control' name="maphong" value={maphong} >
-                                    <option>-- Vui lòng chọn tên phòng---</option>
+                                <select onChange={(e) => this.handleChangeInput(e, 'maphong')} className='form-control' name="maphong">
+                                    <option value={maphong}>-- Vui lòng chọn loại phòng --</option>
                                     {this.state.mangPhong.map((phong, index) => {
                                         return <option key={index} id={`form-hoa-don-phong-${phong.maphong}`} value={phong.maphong} giaphong={phong.giaphong}>
                                             {phong.tenphong}
@@ -228,7 +227,7 @@ class FormHoaDon extends Component {
                                 <p>Tên Phiếu thu*</p>
                             </div>
                             <div className='col-8 pl-0'>
-                                <input onChange={this.handleChangeInput} name="tenphieuthu" value={tenphieuthu} className='form-control' type="text" name="tenphieuthu" value={tenphieuthu}></input>
+                                <input onChange={(e) => this.handleChangeInput(e, '')} name="tenphieuthu" value={tenphieuthu} className='form-control' type="text" name="tenphieuthu" value={tenphieuthu}></input>
                                 <p className='text-danger'>{this.props.HoaDon.errors.tenphieuthu}</p>
                             </div>
                         </div>
@@ -276,7 +275,6 @@ class FormHoaDon extends Component {
                             </div>
                             <div className='col-8 pl-0'>
                                 <input name="giaphong" value={this.state.giaphong} disabled className='form-control' ></input>
-                                <p className='text-danger'>{this.props.HoaDon.errors.namthanhtoan}</p>
                             </div>
                         </div>
                     </div>

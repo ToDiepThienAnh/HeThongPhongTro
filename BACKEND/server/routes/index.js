@@ -1567,7 +1567,6 @@ router.post('/themHoaDon', function (req, res, next) {
 
     var tenphieuthu = req.body.tenphieuthu,
         maphong = req.body.maphong,
-        namthanhtoan = req.body.namthanhtoan,
         thanhtien = req.body.thanhtien,
         tinhtrangphi = req.body.tinhtrangphi,
         thangthanhtoan = req.body.thangthanhtoan,
@@ -1575,7 +1574,7 @@ router.post('/themHoaDon', function (req, res, next) {
         phiphatsinh = req.body.phiphatsinh
 
     pool
-        .query('insert into phieuthu (tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi, namthanhtoan) values ($1,$2,$3,$4,$5,$6,$7, $8)', [tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi, namthanhtoan], (error, response) => {
+        .query('insert into phieuthu (tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi) values ($1,$2,$3,$4,$5,$6,$7)', [tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi], (error, response) => {
             if (error) {
                 console.log(error);
             } else {

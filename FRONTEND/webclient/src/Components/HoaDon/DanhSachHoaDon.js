@@ -77,7 +77,6 @@ class DanhSachHoaDon extends Component {
                             <th>Phòng</th>
                             <th>Ngày Lập</th>
                             <th>Tháng thanh toán</th>
-                            <th>Năm thanh toán</th>
                             <th>Phí Phát Sinh</th>
                             <th>Thành tiền</th>
                             <th>Tình trạng</th>
@@ -90,7 +89,6 @@ class DanhSachHoaDon extends Component {
                                 <td>{hoadon.maphong}</td>
                                 <td>{(moment(hoadon.ngaylap).format("DD/MM/YYYY"))}</td>
                                 <td>{hoadon.thangthanhtoan}</td>
-                                <td>{hoadon.namthanhtoan}</td>
                                 <td>{hoadon.phiphatsinh}</td>
                                 <td>{hoadon.thanhtien}</td>
                                 <td>{hoadon.tinhtrangphi === 'true' ? 'Đã thanh toán' : 'Chưa thanh toán'}</td>
