@@ -71,6 +71,11 @@ class DanhSachTaiSan extends Component {
         return (
             <div>
                 <h3 className='text-secondary'>Danh Sách Tài Sản</h3>
+                <div className='text-left'>
+                    <Link to='/TaiSan/SuaChua'>
+                        <button className='btn btn-primary my-2 mr-4'><span className='ml-2'>Danh sách tài sản sữa chữa</span></button>
+                    </Link>
+                </div>
                 <div className='text-right'>
                     <Link to='/TaiSan/themTaiSan'>
                         <button className='btn btn-success my-2 mr-4'><i className="fa fa-plus"></i><span className='ml-2'>Thêm Tài Sản</span></button>

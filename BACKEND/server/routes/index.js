@@ -1403,7 +1403,7 @@ router.get('/getAllHopDongThue', function (req, res, next) {
 
 
     pool
-        .query('select * from khachhang inner join hopdongthue on khachhang.makhachhang = hopdongthue.mahopdong where tinhtranghopdong = false')
+        .query('select * from khachhang inner join hopdongthue on khachhang.makhachhang = hopdongthue.makhachhang where tinhtranghopdong = false')
         .then(respond => res.send(respond.rows))
         .catch(error =>
             setImmediate(() => {
@@ -1715,9 +1715,11 @@ router.post('/themTaiSan', function (req, res, next) {
         maphong = req.body.maphong,
         dongia = req.body.dongia
 
+    var trangthai = false
+
 
     pool
-        .query('insert into taisan (ten, serial, maphong, dongia) values ($1,$2,$3,$4)', [ten, serial, maphong, dongia], (error, response) => {
+        .query('insert into taisan (ten, serial, maphong, dongia, trangthai) values ($1,$2,$3,$4, $5)', [ten, serial, maphong, dongia, trangthai], (error, response) => {
             if (error) {
                 console.log(error);
             } else {
@@ -1745,7 +1747,7 @@ router.get('/getAllTaiSan', function (req, res, next) {
 
 
     pool
-        .query('select * from taisan')
+        .query('select * from taisan where trangthai = false')
         .then(respond => res.send(respond.rows))
         .catch(error =>
             setImmediate(() => {
@@ -1753,6 +1755,65 @@ router.get('/getAllTaiSan', function (req, res, next) {
             })
         )
 
+});
+
+// lấy danh sách tài sản cần sửa chữa
+router.get('/getAllTaiSanSuaChua', function (req, res, next) {
+    // Website you wish to allow to connect
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+
+
+    pool
+        .query('select * from taisan where trangthai = true')
+        .then(respond => res.send(respond.rows))
+        .catch(error =>
+            setImmediate(() => {
+                throw error
+            })
+        )
+
+});
+
+// set trạng thái tài sản
+router.put('/fixTaiSan/:id', function (req, res, next) {
+    // Website you wish to allow to connect
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    var id = parseInt(req.params.id)
+
+    pool
+        .query(`update taisan set trangthai = true where id = ${id}`, (error, response) => {
+            if (error) {
+                console.log(error);
+            } else {
+                res.send('Đã update dữ liệu thành công');
+            }
+        })
 });
 
 

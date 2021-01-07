@@ -30,6 +30,7 @@ import ChinhSuaNhanVien from './NhanVien/ChinhSuaNhanVien'
 import DanhSachHopDongDaThue from './HopDong/DanhSachHopDongDaThue'
 import DanhSachHoaDonDaThanhToan from './HoaDon/DanhSachHoaDonDaThanhToan'
 import KhachThueTraPhong from './KhachThue/KhachThueTraPhong'
+import TaiSanSuaChua from './TaiSan/TaiSanSuaChua'
 
 export default class Home extends Component {
     render() {
@@ -79,6 +80,8 @@ export default class Home extends Component {
                             <Route path='/HoaDon/HoaDonDaThanhToan' exact component={DanhSachHoaDonDaThanhToan} />
                             {/* Danh sách Khách Trả Phòng */}
                             <Route path='/KhachThue/KhachThueTraPhong' exact component={KhachThueTraPhong} />
+                            {/* Sửa chửa tài sản */}
+                            <Route path='/TaiSan/SuaChua' exact component={TaiSanSuaChua} />
                             <Redirect to='/Phong' />
 
                         </Switch>

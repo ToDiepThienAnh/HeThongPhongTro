@@ -2,6 +2,7 @@ import { SET_DANHSACH_TAISAN, SET_TAISAN } from "../type/type";
 
 const stateDefault = {
     mangTaiSan: [],
+    mangTaiSanSuaChua: [],
     TaiSan: {
         values: {
             // maphong: 0,
@@ -41,7 +42,19 @@ const TaiSanReducer = (state = stateDefault, action) => {
             state.TaiSan = { ...action.TaiSan }
             return { ...state }
         }
+        case 'SET_DANHSACH_TAISAN_SUACHUA': {
+            let newMangPhong = [];
 
+            newMangPhong = action.data.map(taisan => ({
+                ...taisan,
+                key: taisan.id,
+                options: taisan.id
+            }))
+
+            state.mangTaiSanSuaChua = [...newMangPhong]
+
+            return { ...state }
+        }
         default:
             return { ...state }
     }
