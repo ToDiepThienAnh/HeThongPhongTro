@@ -83,7 +83,8 @@ class DanhSachPhong extends Component {
 
     ];
     state = {
-        defaultPhongs: []
+        defaultPhongs: [],
+        mangHopDong: []
     }
 
     handleDelete = (maPhong) => {
@@ -95,22 +96,97 @@ class DanhSachPhong extends Component {
     }
 
     traPhong = async (maphong) => {
-        let xoaKhachThue = await axios({
-            method: 'PUT',
-            url: `http://localhost:4000/xoaKhachThueTheoMaPhong/${maphong}`
-        })
 
-        const xoaHopDong = await axios({
-            method: 'PUT',
-            url: `http://localhost:4000/huyHopDong/${maphong}`
-        })
+        if (window.confirm('Xác nhận trả phòng?')) {
 
-        const setTrangThaiPhong = await axios({
-            method: 'PUT',
-            url: `http://localhost:4000/rejectTinhTrangPhong/${maphong}`
+            for (const hopdong of this.state.mangHopDong) {
+                if (hopdong.maphong === maphong) {
+                    if (new Date(hopdong.ngayhethan).getTime() > new Date().getTime()) {
+                        if (window.confirm('Bạn phải mất tiền cọc !!!')) {
+                            console.log(" mất cọc");
+                            let xoaKhachThue = await axios({
+                                method: 'PUT',
+                                url: `http://localhost:4000/xoaKhachThueTheoMaPhong/${maphong}`
+                            })
+
+                            const xoaHopDong = await axios({
+                                method: 'PUT',
+                                url: `http://localhost:4000/huyHopDong/${maphong}`
+                            })
+
+                            const setTrangThaiPhong = await axios({
+                                method: 'PUT',
+                                url: `http://localhost:4000/rejectTinhTrangPhong/${maphong}`
+                            })
+                            if (setTrangThaiPhong && xoaHopDong && xoaKhachThue) {
+                                alert('trả phòng thành công')
+                            }
+                        } else {
+                            console.log('Thing was not saved to the database.');
+                            return
+                        }
+                    } else {
+                        if (window.confirm('Bạn không mất tiền cọc !!')) {
+                            console.log("Không mất cọc");
+                            let xoaKhachThue = await axios({
+                                method: 'PUT',
+                                url: `http://localhost:4000/xoaKhachThueTheoMaPhong/${maphong}`
+                            })
+
+                            const xoaHopDong = await axios({
+                                method: 'PUT',
+                                url: `http://localhost:4000/huyHopDong/${maphong}`
+                            })
+
+                            const setTrangThaiPhong = await axios({
+                                method: 'PUT',
+                                url: `http://localhost:4000/rejectTinhTrangPhong/${maphong}`
+                            })
+                            if (setTrangThaiPhong && xoaHopDong && xoaKhachThue) {
+                                alert('trả phòng thành công')
+                            }
+                        } else {
+                            console.log('Thing was not saved to the database.');
+                            return
+                        }
+                    }
+
+                }
+            }
+
+            // let xoaKhachThue = await axios({
+            //     method: 'PUT',
+            //     url: `http://localhost:4000/xoaKhachThueTheoMaPhong/${maphong}`
+            // })
+
+            // const xoaHopDong = await axios({
+            //     method: 'PUT',
+            //     url: `http://localhost:4000/huyHopDong/${maphong}`
+            // })
+
+            // const setTrangThaiPhong = await axios({
+            //     method: 'PUT',
+            //     url: `http://localhost:4000/rejectTinhTrangPhong/${maphong}`
+            // })
+
+
+        } else {
+            // Do nothing!
+            console.log('Thing was not saved to the database.');
+            return
+        }
+
+    }
+
+    layDanhSachHopDong = async () => {
+        const layDanhSachHopDong = await axios({
+            method: 'GET',
+            url: 'http://localhost:4000/getAllHopDongThue'
         })
-        if (xoaKhachThue && xoaHopDong && setTrangThaiPhong) {
-            alert('Trả phòng thành công')
+        if (layDanhSachHopDong) {
+            this.setState({
+                mangHopDong: layDanhSachHopDong.data
+            })
         }
     }
 
@@ -129,6 +205,7 @@ class DanhSachPhong extends Component {
 
     componentDidMount() {
         this.layDanhSachPhong();
+        this.layDanhSachHopDong();
     }
 
     renderDanhSachPhong = () => {

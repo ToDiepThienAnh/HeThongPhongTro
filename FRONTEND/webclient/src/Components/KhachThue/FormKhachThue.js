@@ -178,7 +178,9 @@ class FormKhachThue extends Component {
 
 
 
-        this.themKhachThue(hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, sodienthoai, cmnd, maphong)
+        if (this.themKhachThue(hoten, noithuongtru, noisinh, nguyenquan, ngaysinh, gioitinh, sodienthoai, cmnd, maphong)) {
+            alert('Thêm thành công')
+        }
     }
 
     render() {

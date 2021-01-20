@@ -17,7 +17,7 @@ class FormHoaDon extends Component {
     layDanhSachPhong = async () => {
         const layDanhSachPhong = await Axios({
             method: 'GET',
-            url: 'http://localhost:4000/getAllPhong'
+            url: 'http://localhost:4000/getAllPhongDaThue'
         })
 
         if (layDanhSachPhong) {
@@ -179,7 +179,10 @@ class FormHoaDon extends Component {
 
     handleSubmit = (e) => {
         let { tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi } = this.props.HoaDon.values
-        this.themHoaDon(tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi);
+        if (this.themHoaDon(tenphieuthu, maphong, ngaylap, thangthanhtoan, phiphatsinh, thanhtien, tinhtrangphi)) {
+            alert('Thêm thành công')
+        }
+
     }
 
     // onClickPhong = (phong) => {

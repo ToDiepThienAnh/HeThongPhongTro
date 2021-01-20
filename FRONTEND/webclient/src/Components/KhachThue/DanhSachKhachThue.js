@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux'
 import { Table, Button } from 'antd';
 import { SET_DANHSACH_KHACHHANG } from '../../Redux/type/type';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import moment from 'moment'
 
 
@@ -109,4 +109,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(DanhSachKhachThue)
+export default withRouter(connect(mapStateToProps)(DanhSachKhachThue))

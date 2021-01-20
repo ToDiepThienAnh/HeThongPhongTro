@@ -28,8 +28,12 @@ export default class Menu extends Component {
                         <Link className='text-white ml-4 '>Tính tiền</Link>
                     </li> */}
                     <li className='py-2 pl-2 li-hover'>
-                        <i className='text-size fa fa-money-bill' ></i>
+                        <i style={{ fontSize: '20px' }} className="fa fa-money-bill-wave"></i>
                         <Link to='/HoaDon' className='text-white ml-4'>Hóa đơn</Link>
+                    </li>
+                    <li className='py-2 pl-2 li-hover'>
+                        <i className='text-size fa fa-money-bill' ></i>
+                        <Link to='/PhieuChi' className='text-white ml-4'>Phiếu Chi</Link>
                     </li>
                     <li className='py-2 pl-2 li-hover'>
                         <i className='text-size fa fa-user' ></i>

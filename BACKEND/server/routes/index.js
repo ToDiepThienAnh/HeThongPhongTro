@@ -868,7 +868,34 @@ router.get('/getAllPhong', function (req, res, next) {
 
 });
 
+router.get('/getAllPhongDaThue', function (req, res, next) {
+    // Website you wish to allow to connect
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+
+
+    pool
+        .query(`SELECT * FROM phong where tinhtrangphong = 'true'`)
+        .then(respond => res.send(respond.rows))
+        .catch(error =>
+            setImmediate(() => {
+                throw error
+            })
+        )
+
+});
 
 
 
@@ -1174,7 +1201,7 @@ router.get('/getKhachThue/:id', function (req, res, next) {
 
     console.log('id', id)
 
-    pool.query('SELECT * FROM khachhang inner join phong on khachhang.makhachhang = phong.maphong WHERE makhachhang = $1', [id], (error, results) => {
+    pool.query('SELECT * FROM khachhang WHERE makhachhang = $1', [id], (error, results) => {
         if (error) {
             throw error
         }
@@ -1433,7 +1460,7 @@ router.get('/getAllHopDongDaThue', function (req, res, next) {
 
 
     pool
-        .query('select * from khachhang inner join hopdongthue on khachhang.makhachhang = hopdongthue.mahopdong where tinhtranghopdong = true')
+        .query('select * from khachhang inner join hopdongthue on khachhang.makhachhang = hopdongthue.makhachhang where tinhtranghopdong = true')
         .then(respond => res.send(respond.rows))
         .catch(error =>
             setImmediate(() => {
@@ -1850,6 +1877,70 @@ router.get('/deleteTaiSan/:id', function (req, res, next) {
 //password
 // select username,passowrd where 
 
+
+// Phiếu Chi
+
+// lấy danh sách phiếu chi
+router.get('/getAllPhieuChi', function (req, res, next) {
+    // Website you wish to allow to connect
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+
+
+    pool
+        .query('select * from phieuchi inner join khachhang on phieuchi.makhachhang = khachhang.makhachhang')
+        .then(respond => res.send(respond.rows))
+        .catch(error =>
+            setImmediate(() => {
+                throw error
+            })
+        )
+
+});
+
+//thêm phiếu chi
+router.post('/themPhieuChi', function (req, res, next) {
+    // Website you wish to allow to connect
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    var maphong = parseInt(req.body.maphong),
+        makhachhang = parseInt(req.body.makhachhang),
+        tienchi = req.body.tienchi,
+        ngaylap = req.body.ngaylap
+
+    pool
+        .query('insert into phieuchi (maphong, makhachhang, tienchi, ngaylap) values ($1,$2,$3,$4)', [maphong, makhachhang, tienchi, ngaylap], (error, response) => {
+            if (error) {
+                console.log(error);
+            } else {
+                res.send('Đã insert dữ liệu thành công');
+            }
+        })
+});
 
 
 module.exports = router;

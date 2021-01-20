@@ -31,6 +31,8 @@ import DanhSachHopDongDaThue from './HopDong/DanhSachHopDongDaThue'
 import DanhSachHoaDonDaThanhToan from './HoaDon/DanhSachHoaDonDaThanhToan'
 import KhachThueTraPhong from './KhachThue/KhachThueTraPhong'
 import TaiSanSuaChua from './TaiSan/TaiSanSuaChua'
+import PhieuChi from './PhieuChi/PhieuChi'
+import FormPhieuChi from './PhieuChi/FormPhieuChi'
 
 export default class Home extends Component {
     render() {
@@ -52,6 +54,7 @@ export default class Home extends Component {
                             <Route path='/KhachThue' exact component={DanhSachKhachThue} />
                             <Route path='/NhanVien' exact component={DanhSachTaiKhoan} />
                             <Route path='/TaiSan' exact component={DanhSachTaiSan} />
+                            <Route path='/PhieuChi' exact component={PhieuChi} />
                             {/* Form Nhập thông tin */}
                             <Route path='/HopDong/themHopDong' exact component={FormHopDong} />
                             <Route path='/Phong/themPhong' exact component={FormPhong} />
@@ -62,6 +65,7 @@ export default class Home extends Component {
                             <Route path='/TaiSan/themTaiSan' exact component={ThemTaiSan} />
                             <Route path='/NhanVien/themNhanVien' exact component={ThemNhanVien} />
                             <Route path='/TaiSan/themTaiSan' exact component={ThemTaiSan} />
+                            <Route path='/PhieuChi/themPhieuChi' exact component={FormPhieuChi} />
                             <Route path='/ChiTiet/:id' exact component={FormPhong} />
                             {/* ChiTiet  */}
                             <Route path='/HopDong/chiTietHopDong' exact component={ChiTietHopDong} />
