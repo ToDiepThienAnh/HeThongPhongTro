@@ -11,7 +11,7 @@ class FormPhieuChi extends Component {
     state = {
         mangKhachHang: [],
         mangPhong: [],
-        mangHopDong: []
+        mangHopDong: [],
     }
     layDanhSachHopDong = async () => {
         const layDanhSachHopDong = await Axios({
@@ -38,7 +38,7 @@ class FormPhieuChi extends Component {
     layDanhSachPhong = async () => {
         const layDanhSachPhong = await Axios({
             method: 'GET',
-            url: 'http://localhost:4000/getAllPhong'
+            url: 'http://localhost:4000/getAllHopDong'
         })
         if (layDanhSachPhong) {
             this.setState({
@@ -127,7 +127,8 @@ class FormPhieuChi extends Component {
             return accumulator + (+currentValue.tongtiendichvu)
         }, 0)
 
-        // console.log("FormHoaDon -> caculateTotal -> final", final)
+
+
         return total
 
 
@@ -185,10 +186,36 @@ class FormPhieuChi extends Component {
     handleSubmit = () => {
 
         let { maphong, tienchi, ngaylap, makhachhang } = this.props.PhieuChi.values
-        if (this.themPhieuChi(maphong, tienchi, ngaylap, makhachhang)) {
-            alert('Thêm thành công')
+        for (const i of this.state.mangHopDong) {
+            if (i.maphong === parseInt(maphong)) {
+                console.log(new Date(i.ngayhethan).getTime());
+                console.log(new Date(ngaylap).getTime());
+                if (new Date(i.ngayhethan).getTime() < new Date(ngaylap).getTime()) {
+                    // tienchi = this.renderTienCoc() - tienchi
+                    // console.log("tiền chi", tienchi);
+                    // console.log('tiền chi', tienchi);
+                } else {
+                    tienchi = this.renderTienCoc(maphong) - tienchi
+                    console.log("tiền chi ", tienchi);
+                    alert('phải chi ', tienchi)
+                }
+            }
         }
 
+
+        // if (this.themPhieuChi(maphong, tienchi, ngaylap, makhachhang)) {
+        //     alert('Thêm thành công')
+        // }
+
+    }
+
+    renderTienCoc = (maPhong) => {
+        for (const i of this.state.mangHopDong) {
+            if (i.maphong === parseInt(maPhong)) {
+
+                return i.tiencoc;
+            }
+        }
     }
 
     componentDidMount() {
@@ -201,12 +228,12 @@ class FormPhieuChi extends Component {
     render() {
         console.log("Phieu Chi", this.props.PhieuChi.values);
         // console.log("mang dich vu", this.props.mangDichVu);
-        console.log("mang hop dong ", this.state.mangHopDong);
+        console.log('mảng hợp đồng', this.state.mangHopDong);
         let { maphong, makhachhang, ngaylap, tienchi } = this.props.PhieuChi.values
         return (
             <div>
                 <div className='d-flex justify-content-between p-2 border-bottom mb-2'>
-                    <h1 className='text-secondary'>Thêm Phiếu Chi</h1>
+                    <h1 className='text-secondary'>Thêm phiếu trả phòng</h1>
                     <div>
                         <button type='submit' onClick={this.handleSubmit} className='btn btn-success mr-2'><i className="fa fa-check mr-2"></i><span>Lưu</span></button>
 
@@ -235,7 +262,7 @@ class FormPhieuChi extends Component {
                         <p>Người Nhận</p>
                         <select className='form-control w-75' name='makhachhang' value={makhachhang} onChange={this.handleChangeInput}>
                             <option>-- Vui lòng chọn tên người nhận ---</option>
-                            {this.state.mangKhachHang.map((khachhang, index) => {
+                            {this.state.mangHopDong.map((khachhang, index) => {
                                 return <option value={khachhang.makhachhang} key={index}>
                                     {khachhang.hoten}
                                 </option>
@@ -248,7 +275,12 @@ class FormPhieuChi extends Component {
                             <input typeInput='number' name='tienchi' disabled value={tienchi + this.caculate()} onChange={this.handleChangeInput} className='form-control w-100'></input>
                         </div>
                     </div>
-
+                    <div className='col-6 mt-4 d-flex justify-content-between'>
+                        <p>Tiền Cọc</p>
+                        <div className='w-75'>
+                            <input className='form-control' disabled value={this.renderTienCoc(maphong)}></input>
+                        </div>
+                    </div>
                 </div>
                 <Table
                     rowSelection={{

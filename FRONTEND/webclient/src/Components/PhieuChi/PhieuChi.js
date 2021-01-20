@@ -31,13 +31,13 @@ class PhieuChi extends Component {
         console.log("mảng phiếu chi", this.props.mangPhieuChi);
         return (
             <div className='bg-light'>
-                <h1>Danh Sách Phiếu Chi</h1>
+                <h1>Danh Sách Phiếu Trả Phòng</h1>
                 <div className='mb-3 d-flex justify-content-between'>
                     {/* <Link to='/HoaDon/HoaDonDaThanhToan'>
                         <button className='btn btn-primary '>Danh sách hóa đơn đã thanh toán</button>
                     </Link> */}
                     <Link to={'/PhieuChi/themPhieuChi'}>
-                        <button className='btn btn-success '>Thêm Phiếu Chi</button>
+                        <button className='btn btn-success '>Thêm Phiếu trả phòng</button>
                     </Link>
                 </div>
                 <table className='table'>
@@ -46,7 +46,7 @@ class PhieuChi extends Component {
                             <th>Số Phòng</th>
                             <th>Ngày Lập</th>
                             <th>Người Nhận</th>
-                            <th>Số tiền chi</th>
+                            <th>Số tiền</th>
                             <th></th>
 
                         </tr>
