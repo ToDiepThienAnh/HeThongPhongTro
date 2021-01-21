@@ -195,9 +195,9 @@ class FormPhieuChi extends Component {
                     // console.log("tiền chi", tienchi);
                     // console.log('tiền chi', tienchi);
                 } else {
-                    tienchi = this.renderTienCoc(maphong) - tienchi
-                    console.log("tiền chi ", tienchi);
-                    alert('phải chi ', tienchi)
+                    tienchi -= this.renderTienCoc(maphong)
+                    console.log("tiền  ", tienchi);
+                    alert('phải  ' + tienchi)
                 }
             }
         }
