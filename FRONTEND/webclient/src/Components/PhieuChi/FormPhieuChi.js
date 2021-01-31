@@ -190,14 +190,19 @@ class FormPhieuChi extends Component {
             if (i.maphong === parseInt(maphong)) {
                 console.log(new Date(i.ngayhethan).getTime());
                 console.log(new Date(ngaylap).getTime());
-                if (new Date(i.ngayhethan).getTime() < new Date(ngaylap).getTime()) {
+                if (new Date(i.ngayhethan).getTime() <= new Date(ngaylap).getTime()) {
                     // tienchi = this.renderTienCoc() - tienchi
                     // console.log("tiền chi", tienchi);
                     // console.log('tiền chi', tienchi);
-                } else {
                     tienchi -= this.renderTienCoc(maphong)
                     console.log("tiền  ", tienchi);
                     alert('phải  ' + tienchi)
+                    if (this.themPhieuChi(maphong, tienchi, ngaylap, makhachhang)) {
+                        alert('Thêm thành công')
+                    }
+
+                } else {
+                    alert('Bạn phải bị mất tiền cọc !!  ')
                 }
             }
         }
